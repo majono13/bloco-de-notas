@@ -1,1 +1,23 @@
-/* You can add global styles to this file, and also import other style files */
+@use './custom-theme.scss';
+
+@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap');
+
+
+:root {
+  --primay: #3F3B6C;
+  --scondary: #9678ca;
+  --contrast: #77a6bc;
+
+  --font-title:  'Architects Daughter', cursive;
+  --text: 'Roboto', sans-serif;
+}
+
+* {
+  margin:0;
+  padding: 0;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--text);
+}
