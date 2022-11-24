@@ -1,7 +1,7 @@
 @use './custom-theme.scss';
 
 @import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap');
-
+@import url('./bootstrap-grid.min.css');
 
 :root {
   --primary: #3F3B6C;
@@ -16,6 +16,17 @@
   margin:0;
   padding: 0;
   font-size: 16px;
+}
+
+.container, .row {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 1200px;
+  text-align: center;
+  margin: auto;
 }
 
 body {
