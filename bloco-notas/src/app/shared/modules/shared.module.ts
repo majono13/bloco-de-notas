@@ -6,10 +6,11 @@ import { MaterialModule } from './material.module';
 
 //Componentes
 import { NavbarComponent } from '../components/navbar/navbar.component';
+import { BackgroundComponent } from '../components/background/background.component';
 
 @NgModule({
-  declarations: [NavbarComponent],
+  declarations: [NavbarComponent, BackgroundComponent],
   imports: [CommonModule, MaterialModule],
-  exports: [NavbarComponent, MaterialModule],
+  exports: [NavbarComponent, MaterialModule, BackgroundComponent],
 })
 export class SharedModule {}

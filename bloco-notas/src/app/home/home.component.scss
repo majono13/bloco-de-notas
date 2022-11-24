@@ -53,13 +53,9 @@ section {
   }
 }
 
-/* Configurações do botão */
+/*Botão*/
 button {
-  width: 90%;
   transition: transform .5s;
-  &:hover {
-    transform: scale(1.1);
-  }
 }
 
 @media (min-width: 768px) {
@@ -91,10 +87,5 @@ button {
   /*Configuração da imagem*/
   section img {
     display: block;
-  }
-
-  /* Configurações do botão */
-  button {
-    width: 25%;
   }
 }

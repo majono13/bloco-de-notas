@@ -2,36 +2,44 @@
   <section>
     <h1>Cadastrar</h1>
 
-    <form>
-
-      <div class="row">
-        <mat-form-field appearance="fill" class="col-12 col-md-6">
-          <mat-label>Nome</mat-label>
-          <input matInput placeholder="Digite seu nome">
-        </mat-form-field>
-        <mat-form-field appearance="fill" class="col-12 col-md-6">
-          <mat-label>Sobrenome</mat-label>
-          <input matInput placeholder="Digite seu sobrenome">
-        </mat-form-field>
+    <div class="container-form row">
+      <div class="col-md-4 img">
+        <h3>INotes</h3>
+        <img src="assets/img/logo.svg" alt="Logo INotes">
       </div>
+      <form class="col-12 col-md-8">
 
-      <div class="row">
-        <mat-form-field appearance="fill" class="col-12">
-          <mat-label>E-mail</mat-label>
-          <input matInput placeholder="Digite seu e-mail">
-        </mat-form-field>
-      </div>
+        <div class="row">
+          <mat-form-field appearance="fill" class="col-12 col-md-6">
+            <mat-label>Nome</mat-label>
+            <input matInput placeholder="Digite seu nome">
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="col-12 col-md-6">
+            <mat-label>Sobrenome</mat-label>
+            <input matInput placeholder="Digite seu sobrenome">
+          </mat-form-field>
+        </div>
 
-      <div class="row">
-        <mat-form-field appearance="fill" class="col-12 col-md-6">
-          <mat-label>Senha</mat-label>
-          <input matInput placeholder="Digite sua senha">
-        </mat-form-field>
-        <mat-form-field appearance="fill" class="col-12 col-md-6">
-          <mat-label>Confirmar senha</mat-label>
-          <input matInput placeholder="Confirme sua senha">
-        </mat-form-field>
-      </div>
-    </form>
+        <div class="row">
+          <mat-form-field appearance="fill" class="col-12">
+            <mat-label>E-mail</mat-label>
+            <input matInput placeholder="Digite seu e-mail">
+          </mat-form-field>
+        </div>
+
+        <div class="row">
+          <mat-form-field appearance="fill" class="col-12 col-md-6">
+            <mat-label>Senha</mat-label>
+            <input matInput placeholder="Digite sua senha">
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="col-12 col-md-6">
+            <mat-label>Confirmar senha</mat-label>
+            <input matInput placeholder="Confirme sua senha">
+          </mat-form-field>
+        </div>
+
+        <button mat-raised-button type="submit" color="accent">Confirmar</button>
+      </form>
+    </div>
   </section>
 </div>

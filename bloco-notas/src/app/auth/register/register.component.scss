@@ -1,12 +1,60 @@
-.mat-form-field, input::placeholder {
-  color: var(--primary)
+/*** Configurações do formulário ***/
+.mat-form-field,
+input::placeholder {
+  color: var(--primary);
 }
 
-section {
+button {
+  margin: 10px 0;
+  transition: transform 0.5s;
+}
+
+.container-form {
+  display: flex;
   align-items: center;
-  margin:16px;
+  img {
+    max-width: 200px;
+  }
 }
 
+.img {
+  display: none;
+  text-align: left;
+}
 
-@media(min-width:768px) {
+/*Configurações de texto*/
+h1,
+h3 {
+  font-family: var(--font-title);
+  color: var(--primary);
+}
+
+h1 {
+  font-size: 2.5em;
+  padding: 10px;
+}
+
+h3 {
+  font-size: 2em;
+}
+
+/*** Configurações da section***/
+section {
+  padding: 16px;
+  background-color: white;
+  text-align: center;
+  margin: 50px auto 0 auto;
+  max-width: 85%;
+  border-radius: 15px;
+  box-shadow: 1px 1px 5px #3f3b6c;
+}
+
+@media (min-width: 768px) {
+  section {
+    max-width: 90%;
+  }
+
+  .img {
+    display: block;
+  }
 }
