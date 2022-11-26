@@ -1,9 +1,11 @@
 ﻿using Api.Data;
 using Api.Data.Dtos.User;
+using Api.Entities.Exceptions;
 using Api.Models;
 using AutoMapper;
 using FluentResults;
 using Microsoft.AspNetCore.Identity;
+using System.Text.RegularExpressions;
 
 namespace Api.Services
 {
@@ -20,7 +22,19 @@ namespace Api.Services
             _appDbContext = appDbContext;
         }
 
-        internal Result CreateNewUserIdentity(CreateUserDto userDto)
+        public bool IsvalidEmail(string email)
+        {
+            //E-mail vazio ou inválido
+            if (string.IsNullOrEmpty(email) || !Regex.IsMatch(email, @"\w+[@]\w+[.]")) throw new InvalidEmailException("E-mail inválido");
+
+            //E-mail já cadastrado
+            User user_ = _appDbContext.Users.FirstOrDefault(u => u.Email == email);
+            if (user_ != null) throw new ExistsEmailException("E-mail já existente");
+
+            return true;
+        }
+
+        public Result CreateNewUserIdentity(CreateUserDto userDto)
         {
 
             User user = _mapper.Map<User>(userDto);
@@ -34,10 +48,11 @@ namespace Api.Services
 
         public Result CreateNewUser(CreateUserDto userDto)
         {
-            try
+            User user = _mapper.Map<User>(userDto);
+
+            if (IsvalidEmail(user.Email))
             {
                 Result res = CreateNewUserIdentity(userDto);
-                User user = _mapper.Map<User>(userDto);
 
                 if (res.IsSuccess)
                 {
@@ -46,13 +61,9 @@ namespace Api.Services
                     return Result.Ok();
                 }
 
-                return Result.Fail("Falha ao salvar novo usuário");
-            }
-            catch
-            {
-                return Result.Fail("Internal server error");
             }
 
+            throw new InvalidOperationException("Internal server error");
         }
     }
 }
