@@ -2,6 +2,7 @@
 using Api.Data.Dtos.User;
 using Api.Entities.Exceptions;
 using Api.Models;
+using Api.Validators;
 using AutoMapper;
 using FluentResults;
 using Microsoft.AspNetCore.Identity;
@@ -22,18 +23,6 @@ namespace Api.Services
             _appDbContext = appDbContext;
         }
 
-        public bool IsvalidEmail(string email)
-        {
-            //E-mail vazio ou inválido
-            if (string.IsNullOrEmpty(email) || !Regex.IsMatch(email, @"\w+[@]\w+[.]")) throw new InvalidEmailException("E-mail inválido");
-
-            //E-mail já cadastrado
-            User user_ = _appDbContext.Users.FirstOrDefault(u => u.Email == email);
-            if (user_ != null) throw new ExistsEmailException("E-mail já existente");
-
-            return true;
-        }
-
         public Result CreateNewUserIdentity(CreateUserDto userDto)
         {
 
@@ -50,20 +39,16 @@ namespace Api.Services
         {
             User user = _mapper.Map<User>(userDto);
 
-            if (IsvalidEmail(user.Email))
+            Result res = CreateNewUserIdentity(userDto);
+
+            if (res.IsSuccess)
             {
-                Result res = CreateNewUserIdentity(userDto);
-
-                if (res.IsSuccess)
-                {
-                    _appDbContext.Users.Add(user);
-                    _appDbContext.SaveChanges();
-                    return Result.Ok();
-                }
-
+                _appDbContext.Users.Add(user);
+                _appDbContext.SaveChanges();
+                return Result.Ok();
             }
 
-            throw new InvalidOperationException("Internal server error");
+            throw new InvalidOperationException("Algo deu errado, tente novamente mais tarde");
         }
     }
 }

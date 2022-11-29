@@ -7,6 +7,10 @@ namespace Api.Data
 {
     public class AppDbContext : IdentityDbContext<IdentityUser<int>, IdentityRole<int>, int>
     {
+        public AppDbContext()
+        {
+        }
+
         public AppDbContext(DbContextOptions<AppDbContext> opt) : base(opt)
         {
 

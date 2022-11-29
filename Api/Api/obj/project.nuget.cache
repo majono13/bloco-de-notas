@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "60xkzotEKEIF0901UAsyb/EoWEeem0Jq8E+DPMQH+HjrcH/8tYF2txohZ/O65gyXexg/sMZy1qaTZOYSnT3ljQ==",
+  "dgSpecHash": "TR2Yx2j1lMtSn9gJIpOw7Oi+3ctQzm4cvjP+qof+S8TNpujqPun5arewdkvVnJonQib0ouGc72DWUdkuLbVE8A==",
   "success": true,
   "projectFilePath": "C:\\Users\\Rian\\Desktop\\pags\\angular\\bloco-de-notas\\Api\\Api\\Api.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,9 @@
     "C:\\Users\\Rian\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",
     "C:\\Users\\Rian\\.nuget\\packages\\castle.core\\4.4.1\\castle.core.4.4.1.nupkg.sha512",
     "C:\\Users\\Rian\\.nuget\\packages\\fluentresults\\3.15.1\\fluentresults.3.15.1.nupkg.sha512",
+    "C:\\Users\\Rian\\.nuget\\packages\\fluentvalidation\\11.2.1\\fluentvalidation.11.2.1.nupkg.sha512",
+    "C:\\Users\\Rian\\.nuget\\packages\\fluentvalidation.aspnetcore\\11.2.2\\fluentvalidation.aspnetcore.11.2.2.nupkg.sha512",
+    "C:\\Users\\Rian\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.2.1\\fluentvalidation.dependencyinjectionextensions.11.2.1.nupkg.sha512",
     "C:\\Users\\Rian\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Rian\\.nuget\\packages\\microsoft.aspnetcore.authentication\\2.2.0\\microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",
     "C:\\Users\\Rian\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",

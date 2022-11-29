@@ -1,6 +1,9 @@
 ﻿using Api.Data.Dtos.User;
 using Api.Entities.Exceptions;
+using Api.Models;
 using Api.Services;
+using Api.Validators;
+using AutoMapper;
 using FluentResults;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,28 +14,32 @@ namespace Api.Controllers
     public class UserController : ControllerBase
     {
         private UserService _userService;
+        private UserValidator _validator;
 
-        public UserController(UserService userService)
+        public UserController(UserService userService, UserValidator validator)
         {
             _userService = userService;
+            _validator = validator;
         }
 
-        [HttpPost("/register")] 
+        [HttpPost("/register")]
         public IActionResult RegisterUser(CreateUserDto userDto)
         {
             try
             {
-                Result res = _userService.CreateNewUser(userDto);
 
+                if (_validator.UnregisteredEmail(userDto.Email))
+                {
 
-                if (res.IsFailed) return StatusCode(500);
-                return Ok();
+                    Result res = _userService.CreateNewUser(userDto);
+
+                    if (res.IsFailed) return StatusCode(500);
+                    return Ok();
+                }
+
+                throw new ExistsEmailException("E-mail já cadastrado");
             }
             catch (ExistsEmailException e)
-            {
-                return StatusCode(406, e.Message);
-            }
-            catch (InvalidEmailException e)
             {
                 return StatusCode(400, e.Message);
             }
@@ -40,7 +47,7 @@ namespace Api.Controllers
             {
                 return StatusCode(500, e.Message);
             }
-
         }
     }
 }
+
