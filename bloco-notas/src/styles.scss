@@ -46,6 +46,38 @@ button {
   }
 }
 
+/* Container para background animado */
+.content-background-animated {
+  width: 100%;
+  position: absolute;
+  z-index: 999;
+}
+
+/* Animação de entrada */
+.animation {
+  animation: animation-entrance 0.5s linear;
+}
+
+@keyframes animation-entrance {
+  0% {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+/* Campo de erro do formulário */
+mat-error {
+  font-size: 0.8em;
+}
+
+mat-form-field {
+  margin: 10px 0;
+}
+
 @media (min-width: 768px) {
   /* Configurações do botão */
   button {

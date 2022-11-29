@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container animation ">
   <section>
     <h1>Cadastrar</h1>
 
@@ -7,38 +7,74 @@
         <h3>INotes</h3>
         <img src="assets/img/logo.svg" alt="Logo INotes">
       </div>
-      <form class="col-12 col-md-8">
+      <form class="col-12 col-md-8" [formGroup]="userForm">
 
         <div class="row">
+          <!--Nome-->
           <mat-form-field class="col-12 col-md-6">
             <mat-label>Nome</mat-label>
-            <input matInput>
+            <input matInput formControlName="firstname">
+            <mat-error *ngIf="userForm.controls['firstname']?.errors">O nome
+              deve ter no mínimo 3 caracteres</mat-error>
           </mat-form-field>
+
+          <!--Sobrenome-->
           <mat-form-field class="col-12 col-md-6">
             <mat-label>Sobrenome</mat-label>
-            <input matInput>
+            <input matInput formControlName="lastname">
+            <mat-error *ngIf="userForm.controls['lastname']?.errors">O sobrenome
+              deve ter no mínimo 3 caracteres</mat-error>
           </mat-form-field>
+
         </div>
 
         <div class="row">
+
+          <!--E-mail-->
           <mat-form-field class="col-12">
             <mat-label>E-mail</mat-label>
-            <input matInput>
+            <input matInput formControlName="email">
+            <mat-error *ngIf="userForm.controls['email']?.errors?.['email']">E-mail
+              inválido</mat-error>
+            <mat-error
+              *ngIf="userForm.controls['firstname']?.errors?.['required']">O
+              campo e-mail é obrigatório</mat-error>
           </mat-form-field>
+
         </div>
 
         <div class="row">
+
+          <!--Senha-->
           <mat-form-field class="col-12 col-md-6">
             <mat-label>Senha</mat-label>
-            <input matInput>
+            <input matInput formControlName="password">
+            <mat-error
+              *ngIf="userForm.controls['password']?.errors?.['minlength'] || userForm.controls['password']?.errors?.['maxlength'] && !userForm.controls['password']?.errors?.['invalidFormat']">A senha
+              deve ter entre 6 e 20 caracteres</mat-error>
+            <mat-error
+              *ngIf="userForm.controls['password']?.errors?.['required']">A
+              senha é obrigatória</mat-error>
+            <mat-error
+              *ngIf="userForm.controls['password']?.errors?.['invalidFormat'] &&
+              !userForm.controls['password']?.errors?.['required']">A senha deve
+              ter letras maiúsculas e mninúsculas, números e caracteres
+              especiais</mat-error>
           </mat-form-field>
+
+          <!--Confirmar senha-->
           <mat-form-field class="col-12 col-md-6">
             <mat-label>Confirmar senha</mat-label>
-            <input matInput>
+            <input matInput formControlName="rePassword">
+            <mat-error
+            *ngIf="userForm.controls['rePassword']?.errors?.['required']">Confirme sua senha</mat-error>
+            <mat-error
+            *ngIf="userForm.controls['rePassword']?.errors?.['matchingPassword']">As senhas não coicidem</mat-error>
           </mat-form-field>
         </div>
 
-        <button mat-raised-button type="submit" color="accent">Confirmar</button>
+        <button (click)="register()" [disabled]="userForm.invalid"
+          mat-raised-button type="submit" color="accent">Confirmar</button>
       </form>
     </div>
   </section>
