@@ -11,9 +11,10 @@ import { SharedModule } from '../shared/modules/shared.module';
 //Componentes
 import { RegisterComponent } from './register/register.component';
 import { AuthComponent } from './auth/auth.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
-  declarations: [RegisterComponent, AuthComponent],
+  declarations: [RegisterComponent, AuthComponent, LoginComponent],
   imports: [
     CommonModule,
     AuthRoutingModule,

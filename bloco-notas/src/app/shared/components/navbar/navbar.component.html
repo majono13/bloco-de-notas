@@ -1,7 +1,7 @@
 <mat-toolbar>
-  <div class="logo" (click)="navigate('/')">
+  <div class="logo" (click)="navigate('/home')">
     <img src="assets/img/logo.svg" alt="Logo INotes">
     <h1>INOTES</h1>
   </div>
-  <span>Entrar</span>
+  <span (click)="navigate('/login')">Entrar</span>
 </mat-toolbar>
