@@ -38,14 +38,6 @@ body {
   font-family: var(--text);
 }
 
-/* Configurações do botão */
-button {
-  width: 90%;
-  &:hover {
-    transform: scale(1.1);
-  }
-}
-
 /* Container para background animado */
 .content-background-animated {
   width: 100%;
@@ -79,8 +71,4 @@ mat-form-field {
 }
 
 @media (min-width: 768px) {
-  /* Configurações do botão */
-  button {
-    width: 25%;
-  }
 }

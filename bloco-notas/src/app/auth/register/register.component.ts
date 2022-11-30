@@ -1,6 +1,15 @@
+//Angular
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+
+//Models e validators
+import { CreateUser } from 'src/app/models/createUser.model';
 import { ValidatorPassword } from 'src/app/validators/check-password-validator';
+
+//Serviços
+import { Snackbar } from 'src/app/shared/services/snackbar.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -9,15 +18,21 @@ import { ValidatorPassword } from 'src/app/validators/check-password-validator';
 })
 export class RegisterComponent implements OnInit {
   userForm!: FormGroup;
+  waitingResponse: boolean = false;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private _fb: FormBuilder,
+    private _authService: AuthService,
+    private _snackbar: Snackbar,
+    private _router: Router
+  ) {}
 
   ngOnInit(): void {
     this.startsForm();
   }
 
   startsForm() {
-    this.userForm = this.fb.group({
+    this.userForm = this._fb.group({
       firstname: [
         '',
         [
@@ -45,6 +60,25 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    console.log(this.userForm.value);
+    const newUser: CreateUser = {
+      UserName: this.userForm.value.email,
+      FirstName: this.userForm.value.firstname,
+      LastName: this.userForm.value.lastname,
+      Email: this.userForm.value.email,
+      Password: this.userForm.value.password,
+    };
+
+    this.waitingResponse = true;
+
+    this._authService.newUser(newUser).subscribe({
+      error: (err) => {
+        this.waitingResponse = false;
+        this._snackbar.notify(err?.error);
+      },
+      next: (res) => {
+        this.waitingResponse = false;
+        //this._router.navigateByUrl('/');
+      },
+    });
   }
 }

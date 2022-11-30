@@ -8,15 +8,22 @@ import { MaterialModule } from './material.module';
 import { NavbarComponent } from '../components/navbar/navbar.component';
 import { BackgroundComponent } from '../components/background/background.component';
 import { ErrorMessageComponent } from '../cpmponents/error-message/error-message.component';
+import { ButtonComponent } from '../components/button/button.component';
 
 @NgModule({
-  declarations: [NavbarComponent, BackgroundComponent, ErrorMessageComponent],
+  declarations: [
+    NavbarComponent,
+    BackgroundComponent,
+    ErrorMessageComponent,
+    ButtonComponent,
+  ],
   imports: [CommonModule, MaterialModule],
   exports: [
     NavbarComponent,
     MaterialModule,
     BackgroundComponent,
     ErrorMessageComponent,
+    ButtonComponent,
   ],
 })
 export class SharedModule {}

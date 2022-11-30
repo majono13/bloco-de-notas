@@ -1,0 +1,13 @@
+/* Configurações do botão */
+button {
+  width: 90%;
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+@media (min-width: 768px) {
+  button {
+    width: 25%;
+  }
+}

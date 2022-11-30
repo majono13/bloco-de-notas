@@ -10,47 +10,50 @@
       <form class="col-12 col-md-8" [formGroup]="userForm">
 
         <div class="row">
-          <!--Nome-->
+          <!---- Nome ---->
           <mat-form-field class="col-12 col-md-6">
             <mat-label>Nome</mat-label>
             <input matInput formControlName="firstname">
             <mat-error *ngIf="userForm.controls['firstname']?.errors">O nome
               deve ter no mínimo 3 caracteres</mat-error>
           </mat-form-field>
+          <!-------->
 
-          <!--Sobrenome-->
+          <!---- Sobrenome ---->
           <mat-form-field class="col-12 col-md-6">
             <mat-label>Sobrenome</mat-label>
             <input matInput formControlName="lastname">
             <mat-error *ngIf="userForm.controls['lastname']?.errors">O sobrenome
               deve ter no mínimo 3 caracteres</mat-error>
           </mat-form-field>
-
+          <!-------->
         </div>
 
         <div class="row">
 
-          <!--E-mail-->
+          <!---- E-mail ---->
           <mat-form-field class="col-12">
             <mat-label>E-mail</mat-label>
             <input matInput formControlName="email">
             <mat-error *ngIf="userForm.controls['email']?.errors?.['email']">E-mail
               inválido</mat-error>
             <mat-error
-              *ngIf="userForm.controls['firstname']?.errors?.['required']">O
+              *ngIf="userForm.controls['email']?.errors?.['required']">O
               campo e-mail é obrigatório</mat-error>
           </mat-form-field>
-
+          <!-------->
         </div>
 
         <div class="row">
 
-          <!--Senha-->
+          <!---- Senha ---->
           <mat-form-field class="col-12 col-md-6">
             <mat-label>Senha</mat-label>
-            <input matInput formControlName="password">
+            <input type="password" matInput formControlName="password">
             <mat-error
-              *ngIf="userForm.controls['password']?.errors?.['minlength'] || userForm.controls['password']?.errors?.['maxlength'] && !userForm.controls['password']?.errors?.['invalidFormat']">A senha
+              *ngIf="userForm.controls['password']?.errors?.['minlength'] ||
+              userForm.controls['password']?.errors?.['maxlength'] &&
+              !userForm.controls['password']?.errors?.['invalidFormat']">A senha
               deve ter entre 6 e 20 caracteres</mat-error>
             <mat-error
               *ngIf="userForm.controls['password']?.errors?.['required']">A
@@ -61,20 +64,31 @@
               ter letras maiúsculas e mninúsculas, números e caracteres
               especiais</mat-error>
           </mat-form-field>
+          <!-------->
 
-          <!--Confirmar senha-->
+          <!---- Confirmar senha ---->
           <mat-form-field class="col-12 col-md-6">
             <mat-label>Confirmar senha</mat-label>
-            <input matInput formControlName="rePassword">
+            <input type="password" matInput formControlName="rePassword">
             <mat-error
-            *ngIf="userForm.controls['rePassword']?.errors?.['required']">Confirme sua senha</mat-error>
+              *ngIf="userForm.controls['rePassword']?.errors?.['required']">Confirme
+              sua senha</mat-error>
             <mat-error
-            *ngIf="userForm.controls['rePassword']?.errors?.['matchingPassword']">As senhas não coicidem</mat-error>
+              *ngIf="userForm.controls['rePassword']?.errors?.['matchingPassword']">As
+              senhas não coicidem</mat-error>
           </mat-form-field>
+          <!-------->
         </div>
 
-        <button (click)="register()" [disabled]="userForm.invalid"
-          mat-raised-button type="submit" color="accent">Confirmar</button>
+        <!---- Botão de confirmação ---->
+        <app-button *ngIf="!waitingResponse" (click)="register()"
+          message="Confirmar"
+          [disabled]="userForm.invalid"></app-button>
+
+        <app-button *ngIf="waitingResponse"
+          message="Aguarde..."
+          [disabled]="true"></app-button>
+          <!-------->
       </form>
     </div>
   </section>
