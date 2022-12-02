@@ -1,22 +1,19 @@
 ﻿using Api.Data;
 using Api.Data.Dtos.User;
-using Api.Entities.Exceptions;
 using Api.Models;
-using Api.Validators;
 using AutoMapper;
 using FluentResults;
 using Microsoft.AspNetCore.Identity;
-using System.Text.RegularExpressions;
 
 namespace Api.Services
 {
-    public class UserService
+    public class CreateUserService
     {
         private IMapper _mapper;
         private UserManager<IdentityUser<int>> _userManager;
         private AppDbContext _appDbContext;
 
-        public UserService(IMapper mapper, UserManager<IdentityUser<int>> userManager, AppDbContext appDbContext)
+        public CreateUserService(IMapper mapper, UserManager<IdentityUser<int>> userManager, AppDbContext appDbContext)
         {
             _mapper = mapper;
             _userManager = userManager;

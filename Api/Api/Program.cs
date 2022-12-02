@@ -8,7 +8,8 @@ using FluentValidation.AspNetCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddScoped<UserService, UserService>();
+builder.Services.AddScoped<CreateUserService, CreateUserService>();
+builder.Services.AddScoped<LoginService, LoginService>();
 
 //DbContext
 builder.Services.AddDbContext<AppDbContext>(opts => opts

@@ -7,16 +7,16 @@ using AutoMapper;
 using FluentResults;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Api.Controllers
+namespace Api.Controllers.User
 {
     [Route("[controller]")]
     [ApiController]
     public class UserController : ControllerBase
     {
-        private UserService _userService;
+        private     CreateUserService _userService;
         private UserValidator _validator;
 
-        public UserController(UserService userService, UserValidator validator)
+        public UserController(CreateUserService userService, UserValidator validator)
         {
             _userService = userService;
             _validator = validator;
