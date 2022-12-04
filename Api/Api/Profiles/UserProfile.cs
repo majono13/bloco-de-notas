@@ -1,5 +1,5 @@
-﻿using Api.Data.Dtos.User;
-using Api.Models;
+﻿using Api.Data.Dtos.Authentication;
+using Api.Models.Authentication;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 

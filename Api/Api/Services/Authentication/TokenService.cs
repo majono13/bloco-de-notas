@@ -1,21 +1,22 @@
-﻿using Api.Models;
+﻿using Api.Models.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace Api.Services
+namespace Api.Services.Authentication
 {
     public class TokenService
     {
 
-        public Token CreateToken(IdentityUser<int> user) 
+        public Token CreateToken(IdentityUser<int> user, string role)
         {
             Claim[] lawUser = new Claim[]
             {
                 new Claim("email", user.Email),
                 new Claim("id", user.Id.ToString()),
+                new Claim(ClaimTypes.Role, role)
             };
 
             var key = new SymmetricSecurityKey(

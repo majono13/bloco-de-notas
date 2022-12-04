@@ -1,4 +1,4 @@
-﻿namespace Api.Models
+﻿namespace Api.Models.Authentication
 {
     public class Token
     {

@@ -1,23 +1,29 @@
 ﻿using Api.Data;
-using Api.Data.Dtos.User;
-using Api.Models;
+using Api.Data.Dtos.Authentication;
+using Api.Models.Authentication;
 using AutoMapper;
 using FluentResults;
 using Microsoft.AspNetCore.Identity;
 
-namespace Api.Services
+namespace Api.Services.Authentication
 {
     public class CreateUserService
     {
         private IMapper _mapper;
         private UserManager<IdentityUser<int>> _userManager;
         private AppDbContext _appDbContext;
+        private RoleManager<IdentityRole<int>> _roleManager;
 
-        public CreateUserService(IMapper mapper, UserManager<IdentityUser<int>> userManager, AppDbContext appDbContext)
+        public CreateUserService(
+            IMapper mapper, 
+            UserManager<IdentityUser<int>> userManager, 
+            AppDbContext appDbContext,
+            RoleManager<IdentityRole<int>> roleManager)
         {
             _mapper = mapper;
             _userManager = userManager;
             _appDbContext = appDbContext;
+            _roleManager = roleManager;
         }
 
         public Result CreateNewUserIdentity(CreateUserDto userDto)
@@ -27,6 +33,8 @@ namespace Api.Services
             IdentityUser<int> userIdentity = _mapper.Map<IdentityUser<int>>(user);
 
             var resIdentity = _userManager.CreateAsync(userIdentity, userDto.Password);
+
+           _userManager.AddToRoleAsync(userIdentity, "user");
 
             if (resIdentity.Result.Succeeded) return Result.Ok();
             return Result.Fail("Falha ao salvar novo usuário");

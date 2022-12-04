@@ -1,13 +1,12 @@
-﻿using Api.Data.Dtos.User;
+﻿using Api.Data.Dtos.Authentication;
 using Api.Entities.Exceptions;
 using Api.Models;
-using Api.Services;
-using Api.Validators;
+using Api.Services.Authentication;
 using AutoMapper;
 using FluentResults;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Api.Controllers.User
+namespace Api.Controllers.Authentication
 {
     [Route("[controller]")]
     [ApiController]
@@ -33,8 +32,8 @@ namespace Api.Controllers.User
 
                     Result res = _userService.CreateNewUser(userDto);
 
-                    if (res.IsFailed) return StatusCode(500);
-                    return Ok();
+                    if (res.IsFailed) return StatusCode(500, "Internal server error");
+                    return StatusCode(200);
                 }
 
                 throw new ExistsEmailException("E-mail já cadastrado");

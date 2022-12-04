@@ -1,26 +1,32 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Api.Data.Dtos.User
+namespace Api.Models.Authentication
 {
-    public class CreateUserDto
+    public class User
     {
+
+        [Key]
+        public int Id { get; set; }
+        [Required]
         public string UserName { get; set; }
         public string FirstName { get; set; }
+        [Required]
         public string LastName { get; set; }
+        [Required]
+        [EmailAddress]
         public string Email { get; set; }
-        public string Password { get; set; }
 
-        public CreateUserDto()
+        public User()
         {
         }
 
-        public CreateUserDto(string userName, string firstName, string lastName, string email, string password)
+        public User(int id, string userName, string firstName, string lastName, string email)
         {
+            Id = id;
             UserName = userName;
             FirstName = firstName;
             LastName = lastName;
             Email = email;
-            Password = password;
         }
     }
 }

@@ -1,15 +1,28 @@
 using Api.Data;
-using Api.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Api.Validators;
 using FluentValidation.AspNetCore;
+using Api.Services.Authentication;
+using Api.Data.Dtos.Authentication;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+#region Services
 builder.Services.AddScoped<CreateUserService, CreateUserService>();
 builder.Services.AddScoped<LoginService, LoginService>();
+builder.Services.AddScoped<TokenService, TokenService>();
+builder.Services.AddScoped<LogoutService, LogoutService>();
+
+#endregion
+
+#region Fluente Validation
+builder.Services.AddControllers().AddFluentValidation(fv => fv
+    .RegisterValidatorsFromAssemblyContaining<UserValidator>());
+
+builder.Services.AddControllers().AddFluentValidation(fv => fv
+    .RegisterValidatorsFromAssemblyContaining<LoginRequestValidator>());
+
+#endregion
 
 //DbContext
 builder.Services.AddDbContext<AppDbContext>(opts => opts
@@ -22,10 +35,6 @@ builder.Services.AddIdentity<IdentityUser<int>, IdentityRole<int>>()
 
 //Automapper
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
-//Fluente Validation
-builder.Services.AddControllers().AddFluentValidation(fv => fv
-    .RegisterValidatorsFromAssemblyContaining<UserValidator>());
 
 builder.Services.AddControllers();
 
@@ -50,6 +59,7 @@ app.UseCors(policy => policy.AllowAnyHeader()
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
