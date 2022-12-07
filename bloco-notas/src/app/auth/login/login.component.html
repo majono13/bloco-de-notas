@@ -3,28 +3,49 @@
     <h1>Faça login para continuar</h1>
     <div class="row container-form">
 
-      <form class="col-12 col-md-8">
+      <form class="col-12 col-md-8" [formGroup]="loginForm">
 
         <div class="row">
           <!---- E-mail ---->
           <mat-form-field class="col-12">
             <mat-label>E-mail</mat-label>
-            <input matInput>
+            <input matInput type="email" formControlName="email">
+            <mat-error *ngIf="loginForm.controls['email']?.errors?.['email']">E-mail
+              inválido</mat-error>
+            <mat-error
+              *ngIf="loginForm.controls['email']?.errors?.['required']">O e-mail
+              é obrigatório</mat-error>
           </mat-form-field>
           <!-------->
 
           <!---- Senha ---->
           <mat-form-field class="col-12">
             <mat-label>Senha</mat-label>
-            <input matInput>
+            <input matInput type="password" formControlName="password">
+            <mat-error
+              *ngIf="loginForm.controls['password']?.errors?.['required']">A
+              senha é obrigatória</mat-error>
+            <mat-error
+              *ngIf="loginForm.controls['password']?.errors?.['minlength']">A
+              senha deve ter no mínimo 4 caracteres</mat-error>
           </mat-form-field>
           <!-------->
         </div>
-        <app-button message="Entrar"></app-button>
+
+        <app-error *ngIf="loginError?.error" message="{{loginError.message}}"></app-error>
+        <!---- Botões ---->
+        <app-button *ngIf="!waitingResponse" (click)="login()"
+          [disabled]="loginForm.invalid" message="Entrar"></app-button>
+        <app-button *ngIf="waitingResponse" [disabled]="true"
+          message="Aguarde..."></app-button>
+        <!-------->
       </form>
 
       <div class="col-12 col-md-4">
-        <img src="assets/img/avatar-login.svg" alt="Avatar divertido">
+        <img *ngIf="!loginError?.error" src="assets/img/avatar-login.svg"
+          alt="Avatar mulher divertido">
+        <img *ngIf="loginError?.error" src="assets/img/avatar-login-fail.svg"
+          alt="Avatar mulher confusa">
       </div>
     </div>
   </section>

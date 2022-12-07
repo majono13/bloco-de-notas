@@ -26,8 +26,7 @@ namespace Api.Services.Authentication
                 IdentityUser<int> identityUser = _signInManager.UserManager.Users
                     .FirstOrDefault(user => user.NormalizedEmail == request.Email.ToUpper());
 
-                Token token = _tokenService.CreateToken(identityUser, 
-                    _signInManager.UserManager.GetRolesAsync(identityUser).Result.FirstOrDefault());
+                Token token = _tokenService.CreateToken(identityUser);
 
                 return Result.Ok().WithSuccess(token.Value);
             }

@@ -1,6 +1,7 @@
 //Angular
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 //Models e validators
 import { CreateUser } from 'src/app/models/createUser.model';
@@ -22,7 +23,8 @@ export class RegisterComponent implements OnInit {
   constructor(
     private _fb: FormBuilder,
     private _authService: AuthService,
-    private _snackbar: Snackbar
+    private _snackbar: Snackbar,
+    private _router: Router
   ) {}
 
   ngOnInit(): void {
@@ -75,6 +77,7 @@ export class RegisterComponent implements OnInit {
       },
       next: (res) => {
         this.waitingResponse = false;
+        this._router.navigateByUrl('/login');
       },
     });
   }

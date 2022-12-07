@@ -7,23 +7,23 @@ import { MaterialModule } from './material.module';
 //Componentes
 import { NavbarComponent } from '../components/navbar/navbar.component';
 import { BackgroundComponent } from '../components/background/background.component';
-import { ErrorMessageComponent } from '../cpmponents/error-message/error-message.component';
 import { ButtonComponent } from '../components/button/button.component';
+import { ErrorComponent } from '../components/error/error.component';
 
 @NgModule({
   declarations: [
     NavbarComponent,
     BackgroundComponent,
-    ErrorMessageComponent,
     ButtonComponent,
+    ErrorComponent,
   ],
   imports: [CommonModule, MaterialModule],
   exports: [
     NavbarComponent,
     MaterialModule,
     BackgroundComponent,
-    ErrorMessageComponent,
     ButtonComponent,
+    ErrorComponent,
   ],
 })
 export class SharedModule {}

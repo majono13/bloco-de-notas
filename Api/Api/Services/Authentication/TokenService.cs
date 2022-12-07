@@ -10,13 +10,12 @@ namespace Api.Services.Authentication
     public class TokenService
     {
 
-        public Token CreateToken(IdentityUser<int> user, string role)
+        public Token CreateToken(IdentityUser<int> user)
         {
             Claim[] lawUser = new Claim[]
             {
                 new Claim("email", user.Email),
                 new Claim("id", user.Id.ToString()),
-                new Claim(ClaimTypes.Role, role)
             };
 
             var key = new SymmetricSecurityKey(

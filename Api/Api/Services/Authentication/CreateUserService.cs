@@ -34,8 +34,6 @@ namespace Api.Services.Authentication
 
             var resIdentity = _userManager.CreateAsync(userIdentity, userDto.Password);
 
-           _userManager.AddToRoleAsync(userIdentity, "user");
-
             if (resIdentity.Result.Succeeded) return Result.Ok();
             return Result.Fail("Falha ao salvar novo usuário");
         }

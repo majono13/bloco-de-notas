@@ -2,7 +2,7 @@ section {
   padding: 16px;
   background-color: white;
   text-align: center;
-  margin: 50px auto 0 auto;
+  margin: 20px auto 0 auto;
   max-width: 85%;
   border-radius: 15px;
   box-shadow: 1px 1px 5px #3f3b6c;
@@ -27,6 +27,7 @@ section img {
 @media (min-width: 768px) {
   section {
     max-width: 60%;
+    margin: 50px auto 0 auto;
   }
 
   h1 {

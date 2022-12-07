@@ -8,6 +8,6 @@ export class HttpResponseMessageService {
 
   validateMessageResponse(msg: any) {
     if (typeof msg === 'string') return msg;
-    return 'Algo deu errado, tente novamente';
+    return 'Algo deu errado, tente novamente mais tarde';
   }
 }

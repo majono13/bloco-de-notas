@@ -1,4 +1,5 @@
 ﻿using Api.Data.Dtos.Authentication;
+using Api.Models.Authentication;
 using Api.Services.Authentication;
 using FluentResults;
 using Microsoft.AspNetCore.Mvc;
@@ -18,21 +19,23 @@ namespace Api.Controllers.Authentication
         }
 
         [HttpPost]
-        public IActionResult Login(LoginRequest request)
+        public ActionResult<Token> Login(LoginRequest request)
         {
 
             try
             {
                 Result res = _loginService.Login(request);
 
-                if (res.IsFailed) return StatusCode(400, "Login ou senha inválidos");
+                if (res.IsFailed) return Unauthorized("Login ou senha inválidos");
 
-                return Ok(res.Reasons[0].Message);
+                Token token = new Token(res.Reasons[0].Message);
+
+                return Ok(token);
             }
             catch (Exception)
             {
 
-                return StatusCode(500, "Internal server error");
+                return StatusCode(500, "Algo deu errado, tente novamente mais tarde.");
             }
        
         }
