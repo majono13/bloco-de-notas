@@ -5,6 +5,7 @@ using FluentValidation.AspNetCore;
 using Api.Services.Authentication;
 using Api.Data.Dtos.Authentication;
 using Api.Data.Daos;
+using Api.Services.Notes;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,8 @@ builder.Services.AddScoped<LoginService, LoginService>();
 builder.Services.AddScoped<TokenService, TokenService>();
 builder.Services.AddScoped<LogoutService, LogoutService>();
 builder.Services.AddScoped<UserDao, UserDao>();
+builder.Services.AddScoped<NotesDao, NotesDao>();
+builder.Services.AddScoped<NotesService, NotesService>();
 
 #endregion
 

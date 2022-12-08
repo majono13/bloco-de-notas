@@ -15,15 +15,12 @@ namespace Api.Controllers.Authentication
     {
         private CreateUserService _userService;
         private UserValidator _validator;
-        private UserDao _dao;
-        private IMapper _mapper;
+ 
 
-        public UserController(CreateUserService userService, UserValidator validator, UserDao dao, IMapper mapper)
+        public UserController(CreateUserService userService, UserValidator validator)
         {
             _userService = userService;
             _validator = validator;
-            _dao = dao;
-            _mapper = mapper;
         }
 
         [HttpPost("/register")]
@@ -51,17 +48,6 @@ namespace Api.Controllers.Authentication
             {
                 return StatusCode(500, e.Message);
             }
-        }
-
-        [HttpGet("{id}")]
-        public IActionResult GetUser(int id)
-        {
-
-            User user = _dao.GetUserById(id);
-
-            if (user == null) return Unauthorized();
-            ReadUserDto read = _mapper.Map<ReadUserDto>(user);
-            return Ok(read);
         }
     }
 }

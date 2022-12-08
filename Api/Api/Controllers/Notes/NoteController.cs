@@ -2,7 +2,9 @@
 using Api.Data.Dtos.Notes;
 using Api.Models.Authentication;
 using Api.Models.Notes;
+using Api.Services.Notes;
 using AutoMapper;
+using FluentResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers.Notes
@@ -11,35 +13,28 @@ namespace Api.Controllers.Notes
     [Route("[controller]")]
     public class NoteController : ControllerBase
     {
-        private AppDbContext _appDbContext;
-        private IMapper _mapper;
+        private NotesService _notesService;
 
-        public NoteController(AppDbContext appDbContext, IMapper mapper)
+        public NoteController(NotesService notesService)
         {
-            _appDbContext = appDbContext;
-            _mapper = mapper;
+            _notesService = notesService;
         }
 
         [HttpPost]
         public IActionResult CreateNote(CreateNoteDto createDto)
         {
-            Note note = _mapper.Map<Note>(createDto);
 
-            _appDbContext.Notes.Add(note);
-            _appDbContext.SaveChanges();
+            try
+            {
+                _notesService.CreateNote(createDto);
 
-            return Ok();
-        }
-
-
-        [HttpGet("{id}")]
-        public IActionResult GetUser(int id)
-        {
-            Note note = _appDbContext.Notes.FirstOrDefault(note => note.Id == id);
-
-            if (note == null) return Unauthorized();
-
-            return Ok(note);
+                return Ok();
+            }
+            catch
+            {
+                return StatusCode(500, "Falha ao salvar nota, tente novamente mais tarde");
+            }
+          
         }
     }
 

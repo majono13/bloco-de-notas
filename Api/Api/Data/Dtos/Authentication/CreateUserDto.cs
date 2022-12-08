@@ -39,25 +39,34 @@ namespace Api.Data.Dtos.Authentication
 
         public UserValidator()
         {
-            RuleFor(x => x.UserName).NotNull().NotEmpty().MinimumLength(6).Equal(x => x.Email)
-                .WithMessage("Campo username inválido!");
+            RuleFor(x => x.UserName).NotNull().WithMessage("UserName é obrigatório")
+                .NotEmpty().WithMessage("UserName é obrigatório")
+                .MinimumLength(6)
+                .Equal(x => x.Email).WithMessage("Campo username inválido!");
 
-            RuleFor(x => x.FirstName).NotNull().NotEmpty().MinimumLength(3).MaximumLength(70)
-                .WithMessage("Campo Nome inválido!");
+            RuleFor(x => x.FirstName).NotNull().WithMessage("O nome é obrigatório")
+                .NotEmpty().WithMessage("O nome é obrigatório")
+                .MinimumLength(3).WithMessage("O nome deve ter no mínimo 3 caracteres")
+                .MaximumLength(70).WithMessage("O nome deve ter no máximo 70 caracteres");
 
-            RuleFor(x => x.LastName).NotNull().NotEmpty().MinimumLength(3).MaximumLength(70)
-                .WithMessage("Campo sobrenome inválido");
+            RuleFor(x => x.LastName).NotNull().WithMessage("O sobrenome é obrigatório")
+                .NotEmpty().WithMessage("O sobrenome é obrigatório")
+                .MinimumLength(3).WithMessage("O sobrenome deve ter no mínimo 3 caracteres")
+                .MaximumLength(70).WithMessage("O sobrenome deve ter no máximo 70 caracteres");
 
-            RuleFor(x => x.Email).NotNull().NotEmpty().EmailAddress().WithMessage("E-mail inválido");
+            RuleFor(x => x.Email).NotNull().WithMessage("O e-mail é obrigatório")
+                .NotEmpty().WithMessage("O e-mail é obrigatório")
+                .EmailAddress().WithMessage("E-mail inválido");
 
-            RuleFor(x => x.Password).NotNull().NotEmpty().Matches("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])")
+            RuleFor(x => x.Password).NotNull().WithMessage("A senha é obrigatória")
+                .NotEmpty().WithMessage("A senha é obrigatória").Matches("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])")
                .WithMessage("A senha deve conter letras maíusculas e minusculas, número e caracteres especiais");
         }
 
         public bool UnregisteredEmail(string email)
         {
             User user_ = _dao.getUserByEmail(email);
-            if (user_ != null) throw new ExistsEmailException("E-mail já existente");
+            if (user_ != null) throw new ExistsEmailException("E-mail já cadastrado!");
 
             return true;
         }
