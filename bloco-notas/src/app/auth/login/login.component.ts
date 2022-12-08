@@ -58,6 +58,7 @@ export class LoginComponent implements OnInit {
         };
       },
       next: (res: any) => {
+        console.log(res);
         this.waitingResponse = false;
         this._router.navigateByUrl('/user');
       },

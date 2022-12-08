@@ -1,4 +1,5 @@
-﻿using Api.Models.Notes;
+﻿using Api.Models.Authentication;
+using Api.Models.Notes;
 
 namespace Api.Data.Dtos.Authentication
 {
@@ -9,5 +10,6 @@ namespace Api.Data.Dtos.Authentication
         public string LastName { get; set; }
         public string Email { get; set; }
         public ICollection<Note> Notes { get; set; }
+        public string Token { get; set; } 
     }
 }

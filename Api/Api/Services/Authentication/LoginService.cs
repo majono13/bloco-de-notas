@@ -1,5 +1,8 @@
-﻿using Api.Data.Dtos.Authentication;
+﻿using Api.Data;
+using Api.Data.Daos;
+using Api.Data.Dtos.Authentication;
 using Api.Models.Authentication;
+using AutoMapper;
 using FluentResults;
 using Microsoft.AspNetCore.Identity;
 
@@ -10,14 +13,18 @@ namespace Api.Services.Authentication
 
         private SignInManager<IdentityUser<int>> _signInManager;
         private TokenService _tokenService;
+        private IMapper _mapper;
+        private UserDao _userDao;
 
-        public LoginService(SignInManager<IdentityUser<int>> signInManager, TokenService tokenService)
+        public LoginService(SignInManager<IdentityUser<int>> signInManager, TokenService tokenService, IMapper mapper, UserDao userDao)
         {
             _signInManager = signInManager;
             _tokenService = tokenService;
+            _mapper = mapper;
+            _userDao = userDao;
         }
 
-        public Result Login(LoginRequest request)
+        public ReadUserDto Login(LoginRequest request)
         {
             var resIdentity = _signInManager.PasswordSignInAsync(request.Email, request.Password, false, false);
 
@@ -26,11 +33,33 @@ namespace Api.Services.Authentication
                 IdentityUser<int> identityUser = _signInManager.UserManager.Users
                     .FirstOrDefault(user => user.NormalizedEmail == request.Email.ToUpper());
 
-                Token token = _tokenService.CreateToken(identityUser);
+                ReadUserDto readUser = TransformUserProfile(identityUser);
 
-                return Result.Ok().WithSuccess(token.Value);
+                return readUser;
             }
-            return Result.Fail("E-mail ou senha inválidos");
+            return null;
+        }
+
+        private ReadUserDto TransformUserProfile(IdentityUser<int> identityUser)
+        {
+            User user = _userDao.GetUserByEmail(identityUser.Email);
+
+            if(user != null)
+            {
+                ReadUserDto readUser = _mapper.Map<ReadUserDto>(user);
+                Token token = GenerateToken(identityUser);
+                readUser.Token = token.Value;
+
+                return readUser;
+            }
+     
+            return null;
+
+        }
+
+        private Token GenerateToken(IdentityUser<int> identityUser)
+        {
+            return _tokenService.CreateToken(identityUser);
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using Api.Data.Dtos.Authentication;
 using Api.Models.Authentication;
 using Api.Services.Authentication;
-using FluentResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers.Authentication
@@ -24,13 +23,11 @@ namespace Api.Controllers.Authentication
 
             try
             {
-                Result res = _loginService.Login(request);
+                ReadUserDto user = _loginService.Login(request);
 
-                if (res.IsFailed) return Unauthorized("Login ou senha inválidos");
+                if (user == null) return Unauthorized("Login ou senha inválidos");
 
-                Token token = new Token(res.Reasons[0].Message);
-
-                return Ok(token);
+                return Ok(user);
             }
             catch (Exception)
             {

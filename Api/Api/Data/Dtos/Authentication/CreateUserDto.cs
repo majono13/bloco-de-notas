@@ -65,7 +65,7 @@ namespace Api.Data.Dtos.Authentication
 
         public bool UnregisteredEmail(string email)
         {
-            User user_ = _dao.getUserByEmail(email);
+            User user_ = _dao.GetUserByEmail(email);
             if (user_ != null) throw new ExistsEmailException("E-mail já cadastrado!");
 
             return true;

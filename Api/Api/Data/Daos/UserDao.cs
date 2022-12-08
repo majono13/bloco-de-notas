@@ -16,7 +16,7 @@ namespace Api.Data.Daos
             _userManager = userManager;
         }
 
-        public User getUserByEmail(string email)
+        public User GetUserByEmail(string email)
         {
           return  _appDbContext.Users.FirstOrDefault(u => u.Email == email);
         }
