@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Api.Models.Notes;
+using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace Api.Models.Authentication
 {
@@ -7,26 +9,10 @@ namespace Api.Models.Authentication
 
         [Key]
         public int Id { get; set; }
-        [Required]
         public string UserName { get; set; }
-        public string FirstName { get; set; }
-        [Required]
         public string LastName { get; set; }
-        [Required]
-        [EmailAddress]
         public string Email { get; set; }
-
-        public User()
-        {
-        }
-
-        public User(int id, string userName, string firstName, string lastName, string email)
-        {
-            Id = id;
-            UserName = userName;
-            FirstName = firstName;
-            LastName = lastName;
-            Email = email;
-        }
+        [JsonIgnore]
+        public virtual ICollection<Note> Notes { get; set; }
     }
 }

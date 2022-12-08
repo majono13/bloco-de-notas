@@ -1,10 +1,11 @@
 ﻿using Api.Data.Dtos.Authentication;
+using Api.Models.Authentication;
 using Api.Entities.Exceptions;
-using Api.Models;
 using Api.Services.Authentication;
-using AutoMapper;
 using FluentResults;
 using Microsoft.AspNetCore.Mvc;
+using Api.Data.Daos;
+using AutoMapper;
 
 namespace Api.Controllers.Authentication
 {
@@ -12,13 +13,17 @@ namespace Api.Controllers.Authentication
     [ApiController]
     public class UserController : ControllerBase
     {
-        private     CreateUserService _userService;
+        private CreateUserService _userService;
         private UserValidator _validator;
+        private UserDao _dao;
+        private IMapper _mapper;
 
-        public UserController(CreateUserService userService, UserValidator validator)
+        public UserController(CreateUserService userService, UserValidator validator, UserDao dao, IMapper mapper)
         {
             _userService = userService;
             _validator = validator;
+            _dao = dao;
+            _mapper = mapper;
         }
 
         [HttpPost("/register")]
@@ -46,6 +51,17 @@ namespace Api.Controllers.Authentication
             {
                 return StatusCode(500, e.Message);
             }
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetUser(int id)
+        {
+
+            User user = _dao.GetUserById(id);
+
+            if (user == null) return Unauthorized();
+            ReadUserDto read = _mapper.Map<ReadUserDto>(user);
+            return Ok(read);
         }
     }
 }

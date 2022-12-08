@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using FluentValidation.AspNetCore;
 using Api.Services.Authentication;
 using Api.Data.Dtos.Authentication;
+using Api.Data.Daos;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,7 @@ builder.Services.AddScoped<CreateUserService, CreateUserService>();
 builder.Services.AddScoped<LoginService, LoginService>();
 builder.Services.AddScoped<TokenService, TokenService>();
 builder.Services.AddScoped<LogoutService, LogoutService>();
+builder.Services.AddScoped<UserDao, UserDao>();
 
 #endregion
 
@@ -26,7 +28,7 @@ builder.Services.AddControllers().AddFluentValidation(fv => fv
 
 //DbContext
 builder.Services.AddDbContext<AppDbContext>(opts => opts
-    .UseMySql(builder.Configuration
+    .UseLazyLoadingProxies().UseMySql(builder.Configuration
     .GetConnectionString("DbConnection"), new MySqlServerVersion(new Version())));
 
 //Identity

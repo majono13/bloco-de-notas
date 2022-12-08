@@ -1,7 +1,7 @@
-﻿using Api.Entities.Exceptions;
+﻿using Api.Data.Daos;
+using Api.Entities.Exceptions;
 using Api.Models.Authentication;
 using FluentValidation;
-using System.ComponentModel.DataAnnotations;
 
 namespace Api.Data.Dtos.Authentication
 {
@@ -30,11 +30,11 @@ namespace Api.Data.Dtos.Authentication
     #region Validator
     public class UserValidator : AbstractValidator<CreateUserDto>
     {
-        private AppDbContext _appDbContext;
+        private UserDao _dao;
 
-        public UserValidator(AppDbContext appDbContext)
+        public UserValidator(UserDao dao)
         {
-            _appDbContext = appDbContext;
+            _dao = dao;
         }
 
         public UserValidator()
@@ -56,7 +56,7 @@ namespace Api.Data.Dtos.Authentication
 
         public bool UnregisteredEmail(string email)
         {
-            User user_ = _appDbContext.Users.FirstOrDefault(u => u.Email == email);
+            User user_ = _dao.getUserByEmail(email);
             if (user_ != null) throw new ExistsEmailException("E-mail já existente");
 
             return true;

@@ -1,4 +1,4 @@
-﻿using Api.Data;
+﻿using Api.Data.Daos;
 using Api.Data.Dtos.Authentication;
 using Api.Models.Authentication;
 using AutoMapper;
@@ -10,29 +10,23 @@ namespace Api.Services.Authentication
     public class CreateUserService
     {
         private IMapper _mapper;
-        private UserManager<IdentityUser<int>> _userManager;
-        private AppDbContext _appDbContext;
-        private RoleManager<IdentityRole<int>> _roleManager;
+        private UserDao _dao;
 
         public CreateUserService(
             IMapper mapper, 
-            UserManager<IdentityUser<int>> userManager, 
-            AppDbContext appDbContext,
-            RoleManager<IdentityRole<int>> roleManager)
+            UserDao dao)
         {
             _mapper = mapper;
-            _userManager = userManager;
-            _appDbContext = appDbContext;
-            _roleManager = roleManager;
+            _dao = dao;
         }
 
-        public Result CreateNewUserIdentity(CreateUserDto userDto)
+        private Result CreateNewUserIdentity(CreateUserDto userDto)
         {
 
             User user = _mapper.Map<User>(userDto);
             IdentityUser<int> userIdentity = _mapper.Map<IdentityUser<int>>(user);
 
-            var resIdentity = _userManager.CreateAsync(userIdentity, userDto.Password);
+            var resIdentity = _dao.CreateNewUserIdentity(userDto, userIdentity);
 
             if (resIdentity.Result.Succeeded) return Result.Ok();
             return Result.Fail("Falha ao salvar novo usuário");
@@ -46,8 +40,7 @@ namespace Api.Services.Authentication
 
             if (res.IsSuccess)
             {
-                _appDbContext.Users.Add(user);
-                _appDbContext.SaveChanges();
+                _dao.CreateUser(user);
                 return Result.Ok();
             }
 
