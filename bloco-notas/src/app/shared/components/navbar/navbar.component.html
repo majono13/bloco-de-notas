@@ -1,7 +1,17 @@
-<mat-toolbar>
+<mat-toolbar *ngIf="!(isLoggedIn$ | async)">
   <div class="logo" (click)="navigate('/home')">
     <img src="assets/img/logo.svg" alt="Logo INotes">
     <h1>INOTES</h1>
   </div>
   <span (click)="navigate('/login')">Entrar</span>
+</mat-toolbar>
+
+<mat-toolbar *ngIf="isLoggedIn$ | async">
+  <div class="logo" (click)="navigate('/home')">
+    <img src="assets/img/logo.svg" alt="Logo INotes">
+    <h1>INOTES</h1>
+  </div>
+  <span (click)="logout()">
+    <mat-icon title="Sair">exit_to_app</mat-icon>
+  </span>
 </mat-toolbar>

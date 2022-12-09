@@ -6,6 +6,10 @@ using Api.Services.Authentication;
 using Api.Data.Dtos.Authentication;
 using Api.Data.Daos;
 using Api.Services.Notes;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.AspNetCore.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,6 +44,35 @@ builder.Services.AddIdentity<IdentityUser<int>, IdentityRole<int>>()
 
 //Automapper
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+//Autenticação
+
+builder.Services.AddAuthorization(auth =>
+{
+    auth.AddPolicy("Bearer", new AuthorizationPolicyBuilder()
+        .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
+        .RequireAuthenticatedUser().Build());
+});
+
+builder.Services.AddAuthentication(auth =>
+{
+    auth.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    auth.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})  
+        .AddJwtBearer(token =>
+        {
+            token.RequireHttpsMetadata = false;
+            token.SaveToken = true;
+            token.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes("kjdf2i235wqiuyasjh1o387465kqw219jKJtRERsoihoeftrqscjlqd")),
+                ValidateIssuer = false, 
+                ValidateAudience = false,
+                ClockSkew = TimeSpan.Zero,
+        };
+        });
 
 builder.Services.AddControllers();
 

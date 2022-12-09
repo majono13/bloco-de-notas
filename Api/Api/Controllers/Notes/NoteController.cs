@@ -5,6 +5,7 @@ using Api.Models.Notes;
 using Api.Services.Notes;
 using AutoMapper;
 using FluentResults;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers.Notes
@@ -21,6 +22,7 @@ namespace Api.Controllers.Notes
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult CreateNote(CreateNoteDto createDto)
         {
 

@@ -1,6 +1,7 @@
 ﻿using Api.Data.Dtos.Authentication;
 using Api.Models.Authentication;
 using Api.Services.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers.Authentication
@@ -15,6 +16,7 @@ namespace Api.Controllers.Authentication
         public LoginController(LoginService loginService)
         {
             _loginService = loginService;
+ 
         }
 
         [HttpPost]
@@ -35,6 +37,26 @@ namespace Api.Controllers.Authentication
                 return StatusCode(500, "Algo deu errado, tente novamente mais tarde.");
             }
        
+        }
+
+        [HttpPost("/token")]
+        [Authorize] 
+        public IActionResult VerifyToken(Token token)
+        {
+            try
+            {
+                User user = _loginService.GetUserByToken(token);
+
+                if (user != null) return Ok(user);
+
+                return Unauthorized();
+            }
+            catch
+            {
+
+                return StatusCode(500, "Algo deu errado, tente novamente mais tarde");
+            }
+
         }
     }
 }

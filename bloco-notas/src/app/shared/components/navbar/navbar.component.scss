@@ -5,7 +5,8 @@ mat-toolbar {
   justify-content: space-around;
 }
 
-mat-toolbar span, .logo h1 {
+mat-toolbar span,
+.logo h1 {
   font-family: var(--font-title);
   color: white;
   font-weight: bold;
@@ -13,22 +14,30 @@ mat-toolbar span, .logo h1 {
   text-shadow: 1px 1px 2px rgb(0, 0, 0);
 }
 
-span, .logo{
-  transition: transform .5s;
+span,
+.logo {
+  transition: transform 0.5s;
   &:hover {
     transform: scale(1.1);
   }
 }
 
-.logo, mat-toolbar span {
+.logo,
+mat-toolbar span {
   cursor: pointer;
 }
 
 .logo {
   display: flex;
   align-items: center;
-
 }
 .logo img {
   max-width: 70px;
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .logo img {
+    display: block;
+  }
 }

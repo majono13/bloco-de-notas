@@ -47,7 +47,7 @@ namespace Api.Services.Authentication
             if(user != null)
             {
                 ReadUserDto readUser = _mapper.Map<ReadUserDto>(user);
-                Token token = GenerateToken(identityUser);
+                Token token = GenerateToken(user);
                 readUser.Token = token.Value;
 
                 return readUser;
@@ -57,9 +57,20 @@ namespace Api.Services.Authentication
 
         }
 
-        private Token GenerateToken(IdentityUser<int> identityUser)
+        private Token GenerateToken(User user)
         {
-            return _tokenService.CreateToken(identityUser);
+            return _tokenService.CreateToken(user);
+        }
+
+        public User GetUserByToken(Token token)
+        {
+            int id = int.Parse(_tokenService.GetUserIdByToken(token.Value));
+
+            User user = _userDao.GetUserById(id);
+
+            if (user != null) return user;
+            return null;
+
         }
     }
 }

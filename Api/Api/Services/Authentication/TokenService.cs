@@ -10,7 +10,7 @@ namespace Api.Services.Authentication
     public class TokenService
     {
 
-        public Token CreateToken(IdentityUser<int> user)
+        public Token CreateToken(User user)
         {
             Claim[] lawUser = new Claim[]
             {
@@ -31,6 +31,20 @@ namespace Api.Services.Authentication
                 );
 
             return new Token(new JwtSecurityTokenHandler().WriteToken(token));
+        }
+
+        public string GetUserIdByToken(string token)
+        {
+            JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
+            JwtSecurityToken securityToken = tokenHandler.ReadJwtToken(token);
+            IEnumerable<Claim> claims = securityToken.Claims;
+
+            foreach(Claim claim in claims)
+            {
+                if (claim.Type == "id") return claim.Value;
+            };
+
+            return null;
         }
     }
 }
