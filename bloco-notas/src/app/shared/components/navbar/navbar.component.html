@@ -1,3 +1,4 @@
+<!---- Sem usuário logado ---->
 <mat-toolbar *ngIf="!(isLoggedIn$ | async)">
   <div class="logo" (click)="navigate('/home')">
     <img src="assets/img/logo.svg" alt="Logo INotes">
@@ -5,13 +6,36 @@
   </div>
   <span (click)="navigate('/login')">Entrar</span>
 </mat-toolbar>
+<!-------->
 
+
+<!---- Com usuário logado ---->
 <mat-toolbar *ngIf="isLoggedIn$ | async">
   <div class="logo" (click)="navigate('/home')">
     <img src="assets/img/logo.svg" alt="Logo INotes">
     <h1>INOTES</h1>
   </div>
-  <span (click)="logout()">
-    <mat-icon title="Sair">exit_to_app</mat-icon>
-  </span>
+
+  <button mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon>account_circle</mat-icon>
+  </button>
+
+  <mat-menu #menu="matMenu">
+    <p *ngIf="user$ | async as user">Olá, {{user.firstName}}</p>
+    <button mat-menu-item >
+      <mat-icon>library_books</mat-icon>
+      <span>Minhas anotações</span>
+    </button>
+
+    <button mat-menu-item >
+      <mat-icon>inventory</mat-icon>
+      <span>Arquivados</span>
+    </button>
+
+    <button mat-menu-item (click)="logout()">
+      <mat-icon>exit_to_app</mat-icon>
+      <span>Sair</span>
+    </button>
+  </mat-menu>
 </mat-toolbar>
+<!-------->

@@ -24,7 +24,7 @@ namespace Api.Services.Authentication
         {
 
             User user = _mapper.Map<User>(userDto);
-            IdentityUser<int> userIdentity = _mapper.Map<IdentityUser<int>>(user);
+            IdentityUser<int> userIdentity = _mapper.Map<IdentityUser<int>>(userDto);
 
             var resIdentity = _dao.CreateNewUserIdentity(userDto, userIdentity);
 

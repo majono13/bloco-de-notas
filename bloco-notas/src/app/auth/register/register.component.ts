@@ -68,6 +68,8 @@ export class RegisterComponent implements OnInit {
       Password: this.userForm.value.password,
     };
 
+    console.log(newUser);
+
     this.waitingResponse = true;
 
     this._authService.newUser(newUser).subscribe({
