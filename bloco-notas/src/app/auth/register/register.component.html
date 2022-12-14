@@ -13,7 +13,7 @@
           <!---- Nome ---->
           <mat-form-field class="col-12 col-md-6">
             <mat-label>Nome</mat-label>
-            <input matInput formControlName="firstname">
+            <input type="text" matInput formControlName="firstname">
             <mat-error *ngIf="userForm.controls['firstname']?.errors">O nome
               deve ter no mínimo 3 caracteres</mat-error>
           </mat-form-field>
@@ -22,7 +22,7 @@
           <!---- Sobrenome ---->
           <mat-form-field class="col-12 col-md-6">
             <mat-label>Sobrenome</mat-label>
-            <input matInput formControlName="lastname">
+            <input type="text" matInput formControlName="lastname">
             <mat-error *ngIf="userForm.controls['lastname']?.errors">O sobrenome
               deve ter no mínimo 3 caracteres</mat-error>
           </mat-form-field>
@@ -34,7 +34,7 @@
           <!---- E-mail ---->
           <mat-form-field class="col-12">
             <mat-label>E-mail</mat-label>
-            <input matInput formControlName="email">
+            <input type="email" matInput formControlName="email">
             <mat-error *ngIf="userForm.controls['email']?.errors?.['email']">E-mail
               inválido</mat-error>
             <mat-error

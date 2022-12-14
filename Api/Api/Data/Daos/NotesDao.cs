@@ -17,5 +17,17 @@ namespace Api.Data.Daos
             _appDbContext.Notes.Add(note);
             _appDbContext.SaveChanges();
         }
+
+        public IEnumerable<Note> GetNotesByUserId(int id)
+        {
+
+           if(id != null)
+            {
+              return  _appDbContext.Notes.Where(note => note.UserId == id);
+            }
+
+
+            return null;
+        }
     }
 }

@@ -1,4 +1,6 @@
-﻿using Api.Models.Authentication;
+﻿using Api.Data.Daos;
+using Api.Entities.Exceptions;
+using Api.Models.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -9,6 +11,17 @@ namespace Api.Services.Authentication
 {
     public class TokenService
     {
+
+        private UserDao _userDao;
+
+        public TokenService()
+        {
+        }
+
+        public TokenService(UserDao userDao)
+        {
+            _userDao = userDao;
+        }
 
         public Token CreateToken(User user)
         {
@@ -45,6 +58,19 @@ namespace Api.Services.Authentication
             };
 
             return null;
+        }
+
+
+        public User GetUserByToken(Token token)
+        {
+            int id = int.Parse(GetUserIdByToken(token.Value));
+
+            User user = _userDao.GetUserById(id);
+
+            if (user != null) return user;
+
+            throw new UnauthorizedIdRequest("Ação não permitida");
+
         }
     }
 }

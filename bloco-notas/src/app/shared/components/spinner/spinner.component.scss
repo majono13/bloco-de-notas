@@ -1,0 +1,41 @@
+$gradient: linear-gradient(-45deg, #77a6bc, #3f3b6c);
+
+.container {
+  height: 90%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .spinner {
+    width: 70px;
+    height: 70px;
+    position: absolute;
+    border-radius: 50%;
+  }
+}
+
+#spinner {
+  fill: transparent;
+  stroke: url(#GradientColor);
+  stroke-width: 7px;
+  stroke-linecap: round;
+
+  animation: animation-spinner 1.5s linear infinite;
+}
+
+@keyframes animation-spinner {
+  0% {
+    stroke-dasharray: 1 98;
+    stroke-dashoffset: -105;
+  }
+  50% {
+    stroke-dasharray: 80 10;
+    stroke-dashoffset: -160;
+  }
+  100% {
+    stroke-dasharray: 1 98;
+    stroke-dashoffset: -300;
+  }
+}

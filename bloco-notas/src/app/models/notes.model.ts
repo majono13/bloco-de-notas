@@ -1,7 +1,7 @@
 export interface Notes {
-  Id: number;
-  Title: string;
-  Content?: string;
-  IsFiled: boolean;
-  UserId: number;
+  id: number;
+  title: string;
+  content?: string;
+  isFiled: boolean;
+  userId: number;
 }

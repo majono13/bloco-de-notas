@@ -64,13 +64,10 @@ namespace Api.Services.Authentication
 
         public User GetUserByToken(Token token)
         {
-            int id = int.Parse(_tokenService.GetUserIdByToken(token.Value));
-
-            User user = _userDao.GetUserById(id);
+            User user = _tokenService.GetUserByToken(token);
 
             if (user != null) return user;
             return null;
-
         }
     }
 }

@@ -1,1 +1,8 @@
+<app-spinner *ngIf="!(notes$ | async)"></app-spinner>
 
+<main *ngIf="(notes$ | async) as notes">
+
+    <div *ngFor="let note of notes">
+        <p>{{note.title}}</p>
+    </div>
+</main>
