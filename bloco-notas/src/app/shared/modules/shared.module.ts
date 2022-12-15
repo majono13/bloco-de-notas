@@ -10,6 +10,8 @@ import { BackgroundComponent } from '../components/background/background.compone
 import { ButtonComponent } from '../components/button/button.component';
 import { ErrorComponent } from '../components/error/error.component';
 import { SpinnerComponent } from '../components/spinner/spinner.component';
+import { HeaderComponent } from '../components/header/header.component';
+import { FooterComponent } from '../components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,8 @@ import { SpinnerComponent } from '../components/spinner/spinner.component';
     ButtonComponent,
     ErrorComponent,
     SpinnerComponent,
+    HeaderComponent,
+    FooterComponent,
   ],
   imports: [CommonModule, MaterialModule],
   exports: [
@@ -27,6 +31,8 @@ import { SpinnerComponent } from '../components/spinner/spinner.component';
     ButtonComponent,
     ErrorComponent,
     SpinnerComponent,
+    HeaderComponent,
+    FooterComponent,
   ],
 })
 export class SharedModule {}

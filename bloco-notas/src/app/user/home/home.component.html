@@ -1,22 +1,37 @@
-<app-spinner class="spinner" *ngIf="!(notes$ | async)" [loadingScreen]="true" message="Carregando..." ></app-spinner>
+<app-spinner class="spinner" *ngIf="!(notes$ | async)" [loadingScreen]="true"
+  message="Carregando..."></app-spinner>
 
-<main>
+<main *ngIf="(notes$ | async) as notes" class="content" c>
 
-  <header>
-    <h1>Anotações</h1>
-
-    <div class="divider"></div>
-  </header>
-
+  <app-header message="Anotações"></app-header>
   <div class="notes">
 
-    <div class="row" *ngIf="(notes$ | async) as notes">
+    <div class="row">
       <section class="col-6 col-md-3" *ngFor="let note of notes">
         <div class="note">
+          <img src="assets/img/alfinete.svg" alt="">
           <h3>{{note?.title}}</h3>
         </div>
       </section>
     </div>
   </div>
 
+  <mat-paginator [length]="200" [pageSizeOptions]="[10, 50, 100]" aria-label="Select page">
+  </mat-paginator>
 </main>
+
+<div class="banner">
+  <section class="text">
+    <h2>Organize seu dia</h2>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id delectus
+      blanditiis consectetur culpa! Animi fugiat, ducimus optio quasi ullam
+      quaerat laborum, quod modi quae pariatur non, voluptas doloribus? Nihil
+      repellendus possimus similique alias. Dolorum praesentium aperiam minima
+      ex ratione, expedita ab reprehenderit quod rerum cupiditate dignissimos
+      voluptate corporis sapiente. Soluta!</p>
+    <app-button message="Criar uma anotação"></app-button>
+  </section>
+  <img src="assets/img/img-1.svg" alt="">
+</div>
+
+<app-button-add></app-button-add>

@@ -1,0 +1,32 @@
+/*** header ***/
+header {
+  text-align: center;
+  h1 {
+    text-shadow: 1px 1px 3px #3f3b6c5d;
+    padding-top: 24px;
+    font-size: 2em;
+    font-family: var(--font-title);
+    color: var(--primary);
+  }
+
+  /* Divider */
+  .divider {
+    margin: auto;
+    border-radius: 50%;
+    width: 90%;
+    height: 2px;
+    background-image: linear-gradient(to right, #77a6bca9, #9678ca, #3f3b6c93);
+  }
+}
+
+@media (min-width: 768px) {
+  /** Header **/
+  header {
+    h1 {
+      font-size: 2.5em;
+    }
+    .divider {
+      width: 50%;
+    }
+  }
+}

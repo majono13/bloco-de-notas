@@ -1,0 +1,27 @@
+a {
+  margin: 20px 10px;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  background-color: var(--contrast);
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  transition: 1s;
+  cursor: pointer;
+  &:hover {
+    height: 40px;
+    width: 200px;
+    border-radius: 100px 1px 20px 100px;
+  }
+}
+
+@media (min-width: 768px) {
+  a {
+    margin: 20px;
+  }
+}

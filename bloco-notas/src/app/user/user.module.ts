@@ -7,9 +7,10 @@ import { LayoutComponent } from './layout/layout.component';
 import { SharedModule } from '../shared/modules/shared.module';
 
 import { HomeComponent } from './home/home.component';
+import { ButtonAddComponent } from './shared/components/button-add/button-add.component';
 
 @NgModule({
-  declarations: [LayoutComponent, HomeComponent],
+  declarations: [LayoutComponent, HomeComponent, ButtonAddComponent],
   imports: [CommonModule, UserRoutingModule, SharedModule],
 })
 export class UserModule {}
