@@ -1,28 +1,39 @@
-$gradient: linear-gradient(-45deg, #77a6bc, #3f3b6c);
-
-.container {
-  height: 90%;
+.loading-screen {
+  height: 70%;
   width: 100%;
+}
+.container {
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 
-  .spinner {
-    width: 70px;
-    height: 70px;
-    position: absolute;
-    border-radius: 50%;
+  p {
+    font-size: 0.9em;
+    animation: animation-text-spinner 1.5s linear infinite alternate;
+    color: var(--secondary);
   }
 }
 
 #spinner {
   fill: transparent;
   stroke: url(#GradientColor);
-  stroke-width: 7px;
+  stroke-width: 10px;
   stroke-linecap: round;
 
   animation: animation-spinner 1.5s linear infinite;
+}
+
+@keyframes animation-text-spinner {
+  from {
+    opacity: 0.5;
+  }
+
+  to {
+    opacity: 0.9;
+    color: var(--contrast);
+  }
 }
 
 @keyframes animation-spinner {

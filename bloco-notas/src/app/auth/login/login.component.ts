@@ -1,6 +1,6 @@
 //Angular
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
 //Serviços
@@ -17,6 +17,8 @@ import { Error } from 'src/app/models/error.model';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
+  @ViewChild('form') form: NgForm;
+
   loginForm!: FormGroup;
   waitingResponse: boolean = false;
   loginError!: Error;
@@ -49,18 +51,30 @@ export class LoginComponent implements OnInit {
     this.authService.login(credentials).subscribe({
       error: (err) => {
         this.waitingResponse = false;
-
-        this.loginError = {
-          error: true,
-          message: this._httpResponseMessage.validateMessageResponse(
-            err?.error
-          ),
-        };
+        this.showError(err);
       },
       next: (res: any) => {
         this.waitingResponse = false;
         this._router.navigateByUrl('/user');
       },
     });
+  }
+
+  showError(err: any) {
+    this.loginError = {
+      error: true,
+      message: this._httpResponseMessage.validateMessageResponse(err?.error),
+    };
+
+    setTimeout(() => this.clearError(), 3000);
+  }
+
+  clearError() {
+    this.loginError = { error: false, message: '' };
+    this.clearFields();
+  }
+
+  clearFields() {
+    this.form.resetForm();
   }
 }

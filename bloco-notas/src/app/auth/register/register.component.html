@@ -80,15 +80,16 @@
           <!-------->
         </div>
 
-        <!---- Botão de confirmação ---->
+        <!---- Botão ---->
         <app-button *ngIf="!waitingResponse" (click)="register()"
           message="Confirmar"
           [disabled]="userForm.invalid"></app-button>
+        <!---- ---->
 
-        <app-button *ngIf="waitingResponse"
-          message="Aguarde..."
-          [disabled]="true"></app-button>
-          <!-------->
+        <!---- Spinner ---->
+        <app-spinner message="Aguarde..." *ngIf="waitingResponse"
+          widthSpinner="30px"></app-spinner>
+        <!-------->
       </form>
     </div>
   </section>

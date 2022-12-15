@@ -1,8 +1,22 @@
-<app-spinner *ngIf="!(notes$ | async)"></app-spinner>
+<app-spinner class="spinner" *ngIf="!(notes$ | async)" [loadingScreen]="true" message="Carregando..." ></app-spinner>
 
-<main *ngIf="(notes$ | async) as notes">
+<main>
 
-    <div *ngFor="let note of notes">
-        <p>{{note.title}}</p>
+  <header>
+    <h1>Anotações</h1>
+
+    <div class="divider"></div>
+  </header>
+
+  <div class="notes">
+
+    <div class="row" *ngIf="(notes$ | async) as notes">
+      <section class="col-6 col-md-3" *ngFor="let note of notes">
+        <div class="note">
+          <h3>{{note?.title}}</h3>
+        </div>
+      </section>
     </div>
+  </div>
+
 </main>

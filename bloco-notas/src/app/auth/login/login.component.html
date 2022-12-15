@@ -3,7 +3,7 @@
     <h1>Faça login para continuar</h1>
     <div class="row container-form">
 
-      <form class="col-12 col-md-8" [formGroup]="loginForm">
+      <form class="col-12 col-md-8" [formGroup]="loginForm" #form="ngForm">
 
         <div class="row">
           <!---- E-mail ---->
@@ -33,12 +33,14 @@
         </div>
 
         <app-error *ngIf="loginError?.error" message="{{loginError.message}}"></app-error>
-        <!---- Botões ---->
+        <!---- Botão ---->
         <app-button *ngIf="!waitingResponse" (click)="login()"
           [disabled]="loginForm.invalid" message="Entrar"></app-button>
-        <app-button *ngIf="waitingResponse" [disabled]="true"
-          message="Aguarde..."></app-button>
-        <!-------->
+          <!-------->
+
+          <!---- Spinner ---->
+        <app-spinner message="Aguarde..." *ngIf="waitingResponse" widthSpinner="30px"></app-spinner>
+        <!---- ---->
       </form>
 
       <div class="col-12 col-md-4">

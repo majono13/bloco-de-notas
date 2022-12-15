@@ -1,5 +1,5 @@
-<div class="container">
-  <div class="spinner">
+<div class="container" [ngClass]="{'loading-screen' : loadingScreen}">
+  <div class="spinner" [ngStyle]="{width: widthSpinner, heigth: widthSpinner}">
 
     <svg viewBox="0 0 100 100">
         <defs>
@@ -12,4 +12,6 @@
         <circle id="spinner" cx="50" cy="50" r="45"/>
     </svg>
   </div>
+
+  <p>{{message}}</p>
 </div>
