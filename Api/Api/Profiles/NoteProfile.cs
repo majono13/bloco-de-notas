@@ -9,6 +9,7 @@ namespace Api.Profiles
         public NoteProfile()
         {
             CreateMap<CreateNoteDto, Note>();
+            CreateMap<Note, ReadNoteDto>();
         }
     }
 }

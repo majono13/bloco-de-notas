@@ -8,7 +8,6 @@ import { environment } from 'src/environments/environment';
 import { map, Observable } from 'rxjs';
 
 //Serviços
-import { AuthService } from 'src/app/auth/services/auth.service';
 import { TokenService } from 'src/app/auth/services/token.service';
 
 //Models
@@ -20,16 +19,18 @@ import { User } from 'src/app/models/user.model';
 })
 export class NotesService {
   private readonly url = environment.url;
-  private user: User;
   notes$: Observable<Notes[]>;
 
-  constructor(
-    private _authService: AuthService,
-    private http: HttpClient,
-    private _tokenService: TokenService
-  ) {}
+  constructor(private http: HttpClient, private _tokenService: TokenService) {}
 
-  getNotesUser() {
-    return this._authService.getUser().pipe(map((user) => user?.notes));
+  getNotesUser(): Observable<Notes[]> {
+    return this.http.post<Notes[]>(
+      `${this.url}/get-notes`,
+      this._tokenService.getToken()
+    );
+  }
+
+  getNoteById(id: string) {
+    return this.http.get<Notes>(`${this.url}/note/${id}`);
   }
 }

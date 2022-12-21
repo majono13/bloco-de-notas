@@ -1,4 +1,9 @@
 main {
+  .spinner {
+    height: 90vh;
+    display: flex;
+    align-items: center;
+  }
   /** Notes **/
   .notes {
     margin-top: 32px;

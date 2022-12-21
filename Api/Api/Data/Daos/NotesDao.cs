@@ -29,5 +29,15 @@ namespace Api.Data.Daos
 
             return null;
         }
+
+        public Note GetNoteById(int id)
+        {
+
+            if(id !=null)
+            {
+                return _appDbContext.Notes.FirstOrDefault(note => note.Id == id);
+            }
+            return null;
+        }
     }
 }

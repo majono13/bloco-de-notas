@@ -40,5 +40,12 @@ namespace Api.Services.Notes
             return null;
             
         }
+
+        public ReadNoteDto GetNoteById(int id)
+        {
+            Note note = _notesDao.GetNoteById(id);
+
+            return _mapper.Map<ReadNoteDto>(note);
+        } 
     }
 }

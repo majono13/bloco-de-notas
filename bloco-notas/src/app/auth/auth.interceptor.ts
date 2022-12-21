@@ -17,7 +17,7 @@ export class AuthInterceptor implements HttpInterceptor {
       var headers = new HttpHeaders();
 
       headers = new HttpHeaders({
-        Authorization: 'Bearer ' + token,
+        Authorization: 'Bearer ' + token.value,
       });
 
       if (headers != null) {

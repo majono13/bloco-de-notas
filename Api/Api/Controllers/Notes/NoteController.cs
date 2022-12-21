@@ -1,11 +1,8 @@
-﻿using Api.Data;
-using Api.Data.Dtos.Notes;
+﻿using Api.Data.Dtos.Notes;
 using Api.Entities.Exceptions;
 using Api.Models.Authentication;
 using Api.Models.Notes;
 using Api.Services.Notes;
-using AutoMapper;
-using FluentResults;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -52,7 +49,7 @@ namespace Api.Controllers.Notes
 
                 if (notes != null) return Ok(notes);
 
-                return StatusCode(500, "Falha ao recuperar dados");
+               throw new Exception();
             }
             catch (UnauthorizedIdRequest e)
             {
@@ -64,6 +61,26 @@ namespace Api.Controllers.Notes
                 return StatusCode(500, "Falha ao recuperar dados");
             }
         }
+
+        [HttpGet("{id}")]
+        [Authorize]
+        public IActionResult GetNoteById(string id)
+        {
+           try
+            {
+                ReadNoteDto note = _notesService.GetNoteById(int.Parse(id));
+
+                if (note != null) return Ok(note);
+                return StatusCode(404);
+
+            }
+            catch
+            {
+
+                return StatusCode(500, "Falha ao recuperar dados");
+            }
+
+        } 
     }
 
 }

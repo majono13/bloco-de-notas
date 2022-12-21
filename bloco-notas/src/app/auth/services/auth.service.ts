@@ -41,7 +41,7 @@ export class AuthService {
   }
 
   isAuthenticated(): Observable<boolean> {
-    const token: Token = { value: this._tokenService.getToken() };
+    const token: Token = this._tokenService.getToken();
 
     if (token.value != null && !this.subjLoggedIn$.value) {
       return this.checkTokenValidation(token);

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Token } from 'src/app/models/token.model';
 
 @Injectable({
   providedIn: 'root',
@@ -12,8 +13,10 @@ export class TokenService {
     localStorage.setItem(this.key, token);
   }
 
-  getToken(): string {
-    return localStorage.getItem(this.key);
+  getToken(): Token {
+    const token: Token = { value: localStorage.getItem(this.key) };
+
+    return token;
   }
 
   removeToken() {
