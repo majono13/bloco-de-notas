@@ -12,7 +12,6 @@ import { TokenService } from 'src/app/auth/services/token.service';
 
 //Models
 import { Notes } from 'src/app/models/notes.model';
-import { User } from 'src/app/models/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -30,7 +29,11 @@ export class NotesService {
     );
   }
 
-  getNoteById(id: string) {
+  getNoteById(id: string): Observable<Notes> {
     return this.http.get<Notes>(`${this.url}/note/${id}`);
+  }
+
+  deleteNote(id: string) {
+    return this.http.delete(`${this.url}/note/${id}`);
   }
 }

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Notes } from 'src/app/models/notes.model';
 import { NotesService } from '../services/notes.service';
+import { Snackbar } from 'src/app/shared/services/snackbar.service';
 
 @Component({
   selector: 'app-details',
@@ -14,7 +15,9 @@ export class DetailsComponent implements OnInit {
 
   constructor(
     private _route: ActivatedRoute,
-    private _notesService: NotesService
+    private _notesService: NotesService,
+    private _snackBar: Snackbar,
+    private _router: Router
   ) {}
 
   ngOnInit(): void {
@@ -25,5 +28,15 @@ export class DetailsComponent implements OnInit {
     const id = this._route.snapshot.paramMap.get('id');
 
     this.note$ = this._notesService.getNoteById(id);
+  }
+
+  deleteNote(id: number) {
+    this._notesService.deleteNote(id.toString()).subscribe({
+      error: (err) => this._snackBar.notify(err?.error),
+      next: () => {
+        this._router.navigateByUrl('/user');
+        this._snackBar.notify('Nota excluída!');
+      },
+    });
   }
 }

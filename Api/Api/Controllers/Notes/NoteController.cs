@@ -3,6 +3,7 @@ using Api.Entities.Exceptions;
 using Api.Models.Authentication;
 using Api.Models.Notes;
 using Api.Services.Notes;
+using FluentResults;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -32,7 +33,7 @@ namespace Api.Controllers.Notes
             }
             catch
             {
-                return StatusCode(500, "Falha ao salvar nota, tente novamente mais tarde");
+                return StatusCode(500, "Falha ao salvar nota");
             }
           
         }
@@ -80,7 +81,25 @@ namespace Api.Controllers.Notes
                 return StatusCode(500, "Falha ao recuperar dados");
             }
 
-        } 
+        }
+
+        [HttpDelete("{id}")]
+        [Authorize]
+        public IActionResult DeleteNote(string id)
+        {
+            try
+            {
+                Result res = _notesService.DeleteNote(int.Parse(id));
+
+                if (res.IsFailed) return StatusCode(400);
+                return Ok();
+            }
+            catch
+            {
+
+                return StatusCode(500, "Falha ao excluir nota");
+            }
+        }
     }
 
 }

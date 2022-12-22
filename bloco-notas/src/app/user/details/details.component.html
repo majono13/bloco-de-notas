@@ -1,1 +1,22 @@
-<p>{{(note$ | async)?.title}}</p>
+<main>
+  <app-header message="Anotações"></app-header>
+
+  <app-spinner *ngIf="!(note$ | async)" class="spinner" [loadingScreen]="true"
+  message="Carregando..."></app-spinner>
+
+    <div class="note animation"  *ngIf="note$ | async as note">
+      <h1>{{note?.title}}</h1>
+      <section class="description" *ngIf="note?.content">{{note?.content}}</section>
+      <section class="actions">
+        <button title="Editar" mat-button>
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button title="Arquivar" mat-button>
+          <mat-icon>inventory</mat-icon>
+        </button>
+        <button (click)="deleteNote(note?.id)" title="Ecluir" mat-button>
+          <mat-icon>delete</mat-icon>
+        </button>
+      </section>
+    </div>
+</main>

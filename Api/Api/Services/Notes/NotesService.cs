@@ -46,6 +46,14 @@ namespace Api.Services.Notes
             Note note = _notesDao.GetNoteById(id);
 
             return _mapper.Map<ReadNoteDto>(note);
-        } 
+        }
+
+        public Result DeleteNote(int id)
+        {
+
+            bool res = _notesDao.DeleteNote(id);
+            if (res) return Result.Ok();
+            return Result.Fail("Falha ao excluir nota");
+        }
     }
 }

@@ -1,9 +1,4 @@
 main {
-  .spinner {
-    height: 90vh;
-    display: flex;
-    align-items: center;
-  }
   /** Notes **/
   .notes {
     margin-top: 32px;
@@ -17,8 +12,6 @@ main {
       cursor: pointer;
       transition: 0.5s;
       border-radius: 0 0 5% 0;
-      //border-radius: 1% 99% 7% 93% / 95% 0% 100% 5%;
-      box-shadow: 5px rgba(0, 0, 0, 0.336);
       background-color: #3f3b6c28;
       &:hover {
         transform: scale(1.1);

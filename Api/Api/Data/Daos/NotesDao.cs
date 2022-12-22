@@ -39,5 +39,25 @@ namespace Api.Data.Daos
             }
             return null;
         }
+
+        public bool DeleteNote(int id)
+        {
+            if(id !=null)
+            {
+                Note  note = GetNoteById(id);
+
+                if(note !=null)
+                {
+                    _appDbContext.Remove(note);
+                    _appDbContext.SaveChanges();
+
+                    return true;
+                }
+
+                return false;
+            }
+
+            return false;
+        }
     }
 }

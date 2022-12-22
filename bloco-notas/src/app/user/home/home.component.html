@@ -1,4 +1,4 @@
-<main class="content">
+<main>
 
   <app-header message="Anotações"></app-header>
 
@@ -6,7 +6,7 @@
   message="Carregando..."></app-spinner>
 
 
-  <div class="notes" *ngIf="(notes$ | async) as notes">
+  <div class="notes animation" *ngIf="(notes$ | async) as notes">
 
     <div class="row">
       <section class="col-6 col-md-3" *ngFor="let note of notes" routerLink="/user/detalhes/{{note.id}}">
