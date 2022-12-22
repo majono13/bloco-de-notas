@@ -21,9 +21,11 @@ namespace Api.Data.Daos
         public IEnumerable<Note> GetNotesByUserId(int id)
         {
 
-           if(id != null)
+            if (id != null)
             {
-              return  _appDbContext.Notes.Where(note => note.UserId == id);
+                IEnumerable<Note> allNotes = _appDbContext.Notes.Where(note => note.UserId == id);
+
+                return allNotes.Where(note => note.IsFiled == false);
             }
 
 
@@ -33,7 +35,7 @@ namespace Api.Data.Daos
         public Note GetNoteById(int id)
         {
 
-            if(id !=null)
+            if (id != null)
             {
                 return _appDbContext.Notes.FirstOrDefault(note => note.Id == id);
             }
@@ -42,11 +44,11 @@ namespace Api.Data.Daos
 
         public bool DeleteNote(int id)
         {
-            if(id !=null)
+            if (id != null)
             {
-                Note  note = GetNoteById(id);
+                Note note = GetNoteById(id);
 
-                if(note !=null)
+                if (note != null)
                 {
                     _appDbContext.Remove(note);
                     _appDbContext.SaveChanges();
@@ -55,6 +57,19 @@ namespace Api.Data.Daos
                 }
 
                 return false;
+            }
+
+            return false;
+        }
+
+        public bool ArchiveNote(Note note)
+        {
+            if (note != null)
+            {
+                Note noteOrigin = GetNoteById(note.Id);
+                noteOrigin.IsFiled = note.IsFiled;
+                _appDbContext.SaveChanges();
+                return true;
             }
 
             return false;

@@ -33,10 +33,20 @@ export class DetailsComponent implements OnInit {
   deleteNote(id: number) {
     this._notesService.deleteNote(id.toString()).subscribe({
       error: (err) => this._snackBar.notify(err?.error),
-      next: () => {
-        this._router.navigateByUrl('/user');
-        this._snackBar.notify('Nota excluída!');
-      },
+      next: () => this.success('Nota excluída!'),
     });
+  }
+
+  archiveNote(note: Notes) {
+    note.isFiled = !note.isFiled;
+    this._notesService.archiveNote(note).subscribe({
+      error: (err) => this._snackBar.notify(err?.error),
+      next: () => this.success('Nota arquivada!'),
+    });
+  }
+
+  success(msg: string) {
+    this._router.navigateByUrl('/user');
+    this._snackBar.notify(msg);
   }
 }

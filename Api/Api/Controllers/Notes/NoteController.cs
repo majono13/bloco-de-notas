@@ -91,7 +91,7 @@ namespace Api.Controllers.Notes
             {
                 Result res = _notesService.DeleteNote(int.Parse(id));
 
-                if (res.IsFailed) return StatusCode(400);
+                if (res.IsFailed) return StatusCode(400, res.Reasons[0].Message);
                 return Ok();
             }
             catch
@@ -99,6 +99,21 @@ namespace Api.Controllers.Notes
 
                 return StatusCode(500, "Falha ao excluir nota");
             }
+        }
+
+        [HttpPut]
+        [Authorize]
+        public IActionResult ArchiveNote(ReadNoteDto note)
+        {
+
+
+                Result res = _notesService.ArchiveNote(note);
+                if (res.IsFailed) return StatusCode(400, res.Reasons[0].Message);
+               return Ok();
+            
+
+                return StatusCode(500, "Falha ao arquivar nota");
+            
         }
     }
 

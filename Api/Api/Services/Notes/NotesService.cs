@@ -55,5 +55,13 @@ namespace Api.Services.Notes
             if (res) return Result.Ok();
             return Result.Fail("Falha ao excluir nota");
         }
+
+        public Result ArchiveNote(ReadNoteDto note)
+        {
+            bool res = _notesDao.ArchiveNote(_mapper.Map<Note>(note));
+
+           if(res) return Result.Ok();
+            return Result.Fail("Falha ao arquivar nota");
+        }
     }
 }
