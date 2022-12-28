@@ -1,20 +1,19 @@
+@use "../../assets/styles" as *;
+
+.content {
+  @include content-background-animated;
+}
+
 /*** Main ***/
 
 main {
-  max-width: 1000px;
-  margin: 0 16px;
-  padding-top: 70px;
-  text-align: center;
-  height: auto;
-  opacity: 1;
-
+  @include animation;
+  @include main;
+  padding: 1rem;
   section {
-    padding: 10px;
-    max-width: 100%;
+    @include box-section;
     height: 400px;
-    box-shadow: 1px 1px 5px black;
-    background-color: var(--primary);
-    border-radius: 10px;
+    background-color: $primary;
 
     /* Configuração da imagem */
     img {
@@ -23,44 +22,36 @@ main {
       max-width: 400px;
     }
     /* Configurações de texto */
-    h1,
-    h3 {
-      font-family: var(--font-title);
-      color: var(--secondary);
-    }
-
     h1 {
-      font-size: 2em;
+      @include title-big;
       margin-bottom: 5px;
-      padding-top: 16px;
+      padding-top: 1rem;
     }
     h3 {
+      @include title;
       font-size: 1.4em;
     }
 
     p {
+      @include paragraph;
       color: white;
-      text-align: justify;
       padding-bottom: 16px;
     }
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: $media-min) {
   /*** Main ***/
   main {
     margin: auto;
-
     section {
+      max-width: 90%;
       display: flex;
       align-items: center;
       justify-content: center;
 
       /* Configurações de texto */
       padding: 16px;
-      h1 {
-        font-size: 2.5em;
-      }
       h3 {
         font-size: 2em;
       }

@@ -1,12 +1,14 @@
+@use "../../../../assets/styles" as *;
+
 mat-toolbar {
-  background-color: var(--primary);
+  background-color: $primary;
   height: 80px;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.596);
   justify-content: space-around;
 
   span,
   .logo h1 {
-    font-family: var(--font-title);
+    font-family: $font-title;
     color: white;
     font-weight: bold;
     font-size: 1.1em;

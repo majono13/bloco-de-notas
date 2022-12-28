@@ -1,0 +1,36 @@
+form {
+  margin: auto;
+  max-width: 100%;
+  height: 70%;
+  .button {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    button {
+      transition: transform 0.5s;
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  textarea {
+    height: 200px;
+    overflow-y: scroll;
+  }
+}
+
+/*Configurações da barra de scrow*/
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #77a6bc, #9678ca);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+/**/

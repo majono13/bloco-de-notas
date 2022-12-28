@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { Notes } from 'src/app/models/notes.model';
 import { NotesService } from '../services/notes.service';
 import { Snackbar } from 'src/app/shared/services/snackbar.service';
+import { MatDialog } from '@angular/material/dialog';
+import { EditComponent } from '../edit/edit.component';
 
 @Component({
   selector: 'app-details',
@@ -17,7 +19,8 @@ export class DetailsComponent implements OnInit {
     private _route: ActivatedRoute,
     private _notesService: NotesService,
     private _snackBar: Snackbar,
-    private _router: Router
+    private _router: Router,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -39,7 +42,7 @@ export class DetailsComponent implements OnInit {
 
   archiveNote(note: Notes) {
     note.isFiled = !note.isFiled;
-    this._notesService.archiveNote(note).subscribe({
+    this._notesService.editNote(note).subscribe({
       error: (err) => this._snackBar.notify(err?.error),
       next: () => this.success('Nota arquivada!'),
     });
@@ -48,5 +51,15 @@ export class DetailsComponent implements OnInit {
   success(msg: string) {
     this._router.navigateByUrl('/user');
     this._snackBar.notify(msg);
+  }
+
+  openDialog(note: Notes) {
+    const dialogRef = this.dialog.open(EditComponent, {
+      data: note,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 }

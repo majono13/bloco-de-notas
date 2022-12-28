@@ -1,16 +1,6 @@
-@use "./custom-theme.scss";
-
-@import url("https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap");
+@use "./assets/styles/custom-theme.scss";
+@use "./assets/styles" as *;
 @import url("./bootstrap-grid.min.css");
-
-:root {
-  --primary: #3f3b6c;
-  --secondary: #9678ca;
-  --contrast: #77a6bc;
-
-  --font-title: "Architects Daughter", cursive;
-  --text: "Roboto", sans-serif;
-}
 
 body,
 html {
@@ -24,56 +14,7 @@ html {
 }
 
 body {
-  font-family: var(--text);
-}
-
-.container,
-.row {
-  margin: 0;
-  padding: 0;
-}
-
-.container {
-  max-width: 1200px;
-  text-align: center;
-  margin: auto;
-}
-
-/** Spinner **/
-.spinner {
-  height: 90vh;
-  display: flex;
-  align-items: center;
-}
-
-/** Tag main ***/
-main {
-  max-width: 1500px;
-  margin: auto;
-  padding: 16px;
-}
-
-/* Container para background animado */
-.content-background-animated {
-  width: 100%;
-  position: absolute;
-  z-index: 999;
-}
-
-/* Animação de entrada */
-.animation {
-  animation: animation-entrance 0.5s linear;
-}
-
-@keyframes animation-entrance {
-  0% {
-    transform: translateY(-20px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0px);
-    opacity: 1;
-  }
+  font-family: $text;
 }
 
 /* Campo de erro do formulário */

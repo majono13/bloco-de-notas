@@ -101,9 +101,9 @@ namespace Api.Controllers.Notes
             }
         }
 
-        [HttpPut]
+        [HttpPost("/edit")]
         [Authorize]
-        public IActionResult ArchiveNote(ReadNoteDto note)
+        public IActionResult EditNote(ReadNoteDto note)
         {
 
 

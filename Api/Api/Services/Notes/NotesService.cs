@@ -58,7 +58,7 @@ namespace Api.Services.Notes
 
         public Result ArchiveNote(ReadNoteDto note)
         {
-            bool res = _notesDao.ArchiveNote(_mapper.Map<Note>(note));
+            bool res = _notesDao.EditNote(_mapper.Map<Note>(note));
 
            if(res) return Result.Ok();
             return Result.Fail("Falha ao arquivar nota");

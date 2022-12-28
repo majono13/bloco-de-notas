@@ -8,7 +8,7 @@
       <h1>{{note?.title}}</h1>
       <section class="description" *ngIf="note?.content">{{note?.content}}</section>
       <section class="actions">
-        <button title="Editar" mat-button>
+        <button (click)="openDialog(note)" title="Editar" mat-button>
           <mat-icon>edit</mat-icon>
         </button>
         <button (click)="archiveNote(note)" title="Arquivar" mat-button>

@@ -37,7 +37,7 @@ export class NotesService {
     return this.http.delete(`${this.url}/note/${id}`);
   }
 
-  archiveNote(note: Notes) {
-    return this.http.put(`${this.url}/note`, note);
+  editNote(note: Notes) {
+    return this.http.post(`${this.url}/edit`, note);
   }
 }

@@ -1,60 +1,28 @@
+@use "../../../assets/styles/" as *;
+
 /*** Configurações do formulário ***/
 .mat-form-field,
 input::placeholder {
   color: var(--primary);
 }
 
-button {
-  margin: 10px 0;
-  transition: transform 0.5s;
-}
-
-.container-form {
-  display: flex;
-  align-items: center;
-  img {
-    max-width: 200px;
+main {
+  @include animation;
+  padding: 1rem;
+  h1 {
+    @include title-big;
+    padding: 1rem;
   }
-}
 
-.img {
-  display: none;
-  text-align: left;
-}
-
-/*Configurações de texto*/
-h1,
-h3 {
-  font-family: var(--font-title);
-  color: var(--primary);
-}
-
-h1 {
-  font-size: 2.5em;
-  padding: 10px;
-}
-
-h3 {
-  font-size: 2em;
-}
-
-/*** Configurações da section***/
-section {
-  padding: 16px;
-  background-color: white;
-  text-align: center;
-  margin: 50px auto 0 auto;
-  max-width: 85%;
-  border-radius: 15px;
-  box-shadow: 1px 1px 5px #3f3b6c;
-}
-
-@media (min-width: 768px) {
   section {
-    max-width: 90%;
-  }
-
-  .img {
-    display: block;
+    background-color: white;
+    @include box-section;
+    form {
+      padding: 1rem;
+      button {
+        margin: 1rem 0;
+        transition: transform 0.5s;
+      }
+    }
   }
 }

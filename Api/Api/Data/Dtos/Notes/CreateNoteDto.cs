@@ -17,7 +17,7 @@ namespace Api.Data.Dtos.Notes
             RuleFor(x => x.Title).NotNull().WithMessage("Titulo é obrigatório")
                 .NotEmpty().WithMessage("Titulo é obrigatório")
                 .MinimumLength(3).WithMessage("Titulo deve ter no mínimo 3 caracteres")
-                .MaximumLength(150).WithMessage("Titulo deve ter no máximo 150 caracteres");
+                .MaximumLength(100).WithMessage("Titulo deve ter no máximo 100 caracteres");
 
             RuleFor(x => x.Content).MaximumLength(1000).WithMessage("A descrição deve ter no máximo 1000 caracteres");
 

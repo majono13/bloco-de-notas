@@ -55,21 +55,26 @@ namespace Api.Data.Daos
 
                     return true;
                 }
-
-                return false;
             }
 
             return false;
         }
 
-        public bool ArchiveNote(Note note)
+        public bool EditNote(Note note)
         {
             if (note != null)
             {
                 Note noteOrigin = GetNoteById(note.Id);
-                noteOrigin.IsFiled = note.IsFiled;
-                _appDbContext.SaveChanges();
-                return true;
+
+                if (noteOrigin != null)
+                {
+                   /* noteOrigin.IsFiled = note.IsFiled;
+                    noteOrigin.UserId = note.UserId;
+                    noteOrigin.Title = note.Title;
+                    noteOrigin.Content = note.Content;*/
+                    _appDbContext.SaveChanges();
+                    return true;
+                }
             }
 
             return false;

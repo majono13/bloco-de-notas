@@ -1,0 +1,91 @@
+@use "variables" as *;
+
+/*@mixin container {
+  max-width: 1200px;
+  text-align: center;
+  margin: auto;
+}*/
+
+@mixin container-margin-none {
+  margin: 0;
+  padding: 0;
+}
+
+@mixin spinner {
+  height: 90vh;
+  display: flex;
+  align-items: center;
+}
+
+@mixin main {
+  max-width: 1500px;
+  margin: auto;
+}
+
+/* Container para background animado */
+@mixin content-background-animated {
+  width: 100%;
+  position: absolute;
+  z-index: 999;
+}
+
+/* Animação de entrada */
+@mixin animation {
+  animation: animation-entrance 0.5s linear;
+
+  @keyframes animation-entrance {
+    0% {
+      transform: translateY(-20px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0px);
+      opacity: 1;
+    }
+  }
+}
+
+/* Mixins para texto */
+@mixin title {
+  font-family: $font-title;
+  color: $secondary;
+}
+
+@mixin title-big {
+  font-family: $font-title;
+  color: $primary;
+  font-size: 2rem;
+
+  @media (min-width: $media-min) {
+    font-size: 2.5em;
+  }
+}
+
+@mixin paragraph {
+  text-align: justify;
+  font-size: 1rem;
+}
+
+/* Tela inical, Login e cadastro*/
+@mixin box-section {
+  max-width: 90%;
+  text-align: center;
+  margin: 0 auto;
+  padding: 1rem;
+  box-shadow: 1px 1px 5px #3f3b6c;
+  border-radius: 10px;
+
+  @media (min-width: $media-min) {
+    max-width: 60%;
+    margin: 2rem auto;
+  }
+}
+
+@mixin box-main {
+  max-width: 1000px;
+  margin: 0 16px;
+  padding-top: 6rem;
+  text-align: center;
+  height: auto;
+  opacity: 1;
+}
